@@ -1370,29 +1370,16 @@ select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmln
   width: 100%;
 }
 .hero-eyebrow {
-  display: inline-flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 16px;
-  font-size: 0.74rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.24em;
+  display: inline-block;
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(0.9rem, 1.4vw, 1.1rem);
+  letter-spacing: 0.02em;
   color: var(--gold-light);
   margin-bottom: var(--sp-5);
   opacity: 0;
   animation: heroFadeUp 0.8s ease 0.2s forwards;
-}
-.hero-eyebrow::before {
-  content: "";
-  display: block;
-  width: 44px;
-  height: 2px;
-  flex-shrink: 0;
-  background: var(--gold);
-}
-[dir="rtl"] .hero-eyebrow {
-  flex-direction: row-reverse;
 }
 .hero-title {
   font-family: 'Playfair Display', serif;
@@ -1950,91 +1937,139 @@ select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmln
 .subpanel.active { display: block; }
 
 /* ── MISSION PAGE ── */
+.mission-section { position: relative; overflow: hidden; }
+.mission-section::before {
+  /* faint corner geometry, on-brand tatreez feel */
+  content: '';
+  position: absolute;
+  top: -80px;
+  inset-inline-end: -80px;
+  width: 320px;
+  height: 320px;
+  background:
+    repeating-linear-gradient(45deg, rgba(0,92,52,0.05) 0 2px, transparent 2px 14px),
+    repeating-linear-gradient(-45deg, rgba(200,16,46,0.04) 0 2px, transparent 2px 14px);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
 .mission-grid {
+  position: relative;
+  z-index: 1;
   display: grid;
-  grid-template-columns: 1fr 320px;
-  gap: var(--sp-12);
+  grid-template-columns: 1fr 380px;
+  gap: var(--sp-16);
   align-items: start;
 }
+.mission-lede {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.2rem, 2.1vw, 1.6rem);
+  line-height: 1.5;
+  color: var(--black);
+  font-weight: 400;
+  max-width: 38ch;
+  margin: var(--sp-5) 0 var(--sp-10);
+  padding-inline-start: var(--sp-5);
+  border-inline-start: 3px solid var(--gold);
+}
 .mission-block {
-  display: flex;
-  gap: var(--sp-4);
+  position: relative;
+  display: grid;
+  grid-template-columns: 52px 1fr;
+  gap: var(--sp-5);
   margin-bottom: var(--sp-8);
   padding-bottom: var(--sp-8);
   border-bottom: 1px solid var(--border);
 }
-.mission-block:last-child { border-bottom: none; }
+.mission-block:last-child { border-bottom: none; padding-bottom: 0; margin-bottom: 0; }
+.mission-block-num {
+  position: absolute;
+  top: 0;
+  inset-inline-end: 0;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--gold);
+  letter-spacing: 0.06em;
+  opacity: 0.8;
+}
 .mission-icon {
   flex-shrink: 0;
-  width: 48px;
-  height: 48px;
+  width: 52px;
+  height: 52px;
   background: var(--green-pale);
+  border: 1px solid rgba(0,92,52,0.14);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--green);
+  transition: transform var(--t-fast), background var(--t-fast), color var(--t-fast);
 }
-.mission-block h3 { font-size: 1.1rem; margin-bottom: var(--sp-2); color: var(--black); }
-.mission-block p { color: var(--text-mid); font-size: 0.95rem; line-height: 1.8; }
+.mission-block:hover .mission-icon {
+  background: var(--green);
+  color: #fff;
+  transform: translateY(-3px);
+}
+.mission-block h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  margin-bottom: var(--sp-2);
+  color: var(--black);
+}
+.mission-block p { color: var(--text-mid); font-size: 1rem; line-height: 1.85; }
+
+/* premium gallery frame for the tatreez poster */
 .tatreez-panel {
-  display: flex;
-  gap: var(--sp-6);
-  align-items: stretch;
-  min-height: 320px;
-}
-.tatreez-stripe {
-  flex-shrink: 0;
-  width: 14px;
-  border-radius: var(--r-pill);
-  background:
-    repeating-linear-gradient(180deg,
-      var(--green) 0 16px,
-      var(--gold) 16px 22px,
-      var(--green) 22px 38px,
-      var(--red) 38px 42px);
-}
-.tatreez-quote {
+  position: sticky;
+  top: 108px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding: var(--sp-4) 0;
+  align-items: center;
 }
-.tatreez-quote .quote-mark {
-  font-family: 'Playfair Display', serif;
-  font-size: 3.4rem;
-  line-height: 0.5;
-  color: var(--gold);
-  opacity: 0.55;
-  margin-bottom: var(--sp-4);
+.poster-frame {
+  margin: 0;
+  position: relative;
+  padding: 14px;
+  background: linear-gradient(160deg, #ffffff 0%, var(--cream) 100%);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  box-shadow: 0 26px 64px rgba(11, 12, 14, 0.18);
 }
-.tatreez-quote blockquote {
+.poster-frame::before {
+  content: '';
+  position: absolute;
+  inset: 7px;
+  border: 1px solid rgba(201, 168, 76, 0.55);
+  border-radius: calc(var(--r-lg) - 6px);
+  pointer-events: none;
+  z-index: 2;
+}
+.tatreez-poster {
+  width: 100%;
+  max-width: 360px;
+  height: auto;
+  display: block;
+  border-radius: calc(var(--r-lg) - 8px);
+}
+.poster-caption {
+  margin-top: var(--sp-5);
+  text-align: center;
   font-family: 'Playfair Display', serif;
   font-style: italic;
-  font-weight: 500;
-  font-size: 1.45rem;
-  line-height: 1.55;
-  color: var(--black);
-  margin: 0 0 var(--sp-5);
-}
-.tatreez-quote cite {
-  font-style: normal;
-  font-size: 0.8rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--green);
-}
-.tatreez-quote cite span {
-  display: block;
-  margin-top: 4px;
-  font-weight: 400;
-  font-size: 0.85rem;
-  letter-spacing: 0;
-  text-transform: none;
+  font-size: 0.95rem;
   color: var(--text-mid);
+  letter-spacing: 0.01em;
+  max-width: 360px;
 }
-[dir="rtl"] .tatreez-panel { flex-direction: row-reverse; }
+.poster-caption .ar-line {
+  display: block;
+  font-family: 'Amiri', serif;
+  font-style: normal;
+  font-size: 1.2rem;
+  color: var(--green);
+  margin-bottom: 4px;
+}
 
 /* ── COMMITTEE ── */
 .committee-grid {
@@ -2065,6 +2100,115 @@ select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmln
 }
 .committee-name { font-weight: 600; font-size: 0.95rem; margin-bottom: 4px; }
 .committee-role { font-size: 12px; color: var(--text-muted); }
+
+/* ── OUR STORY / TIMELINE ── */
+.story-grid {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: var(--sp-16);
+  align-items: start;
+}
+.story-intro p { color: var(--text-mid); font-size: 1.02rem; line-height: 1.9; margin-top: var(--sp-5); }
+.story-intro p + p { margin-top: var(--sp-4); }
+.story-sign {
+  margin-top: var(--sp-8);
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 1.15rem;
+  color: var(--green);
+}
+.timeline {
+  position: relative;
+  padding-inline-start: var(--sp-8);
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  inset-inline-start: 7px;
+  top: 6px;
+  bottom: 6px;
+  width: 2px;
+  background: linear-gradient(var(--green), var(--gold));
+}
+.timeline-item { position: relative; padding-bottom: var(--sp-9); }
+.timeline-item:last-child { padding-bottom: 0; }
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  inset-inline-start: -28px;
+  top: 4px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--cream);
+  border: 3px solid var(--green);
+}
+.timeline-year {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 1.35rem;
+  color: var(--green);
+  line-height: 1;
+  margin-bottom: var(--sp-2);
+}
+.timeline-item h4 { font-size: 1.02rem; font-weight: 700; color: var(--black); margin-bottom: 4px; }
+.timeline-item p { color: var(--text-mid); font-size: 0.95rem; line-height: 1.75; }
+
+/* ── FOCUS PILLARS ── */
+.focus-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--sp-6);
+}
+.focus-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: var(--sp-8) var(--sp-6);
+  transition: box-shadow var(--t-fast), transform var(--t-fast), border-color var(--t-fast);
+}
+.focus-card:hover { box-shadow: 0 18px 40px rgba(11,12,14,0.09); transform: translateY(-4px); border-color: rgba(0,92,52,0.25); }
+.focus-ic {
+  width: 46px; height: 46px;
+  border-radius: var(--r-md);
+  background: var(--green-pale);
+  color: var(--green);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: var(--sp-5);
+}
+.focus-card h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 600; margin-bottom: var(--sp-2); color: var(--black); }
+.focus-card p { color: var(--text-mid); font-size: 0.92rem; line-height: 1.7; }
+
+/* ── BELIEF BAND ── */
+.belief-band { background: var(--green); }
+.belief-inner { max-width: 820px; margin: 0 auto; text-align: center; }
+.belief-inner .eyebrow-light {
+  font-size: 0.72rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--gold-light); margin-bottom: var(--sp-5);
+}
+.belief-inner p {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.4rem, 3vw, 2.1rem);
+  line-height: 1.45;
+  color: var(--white);
+  font-weight: 400;
+}
+.belief-inner p .hl { color: var(--gold-light); font-style: italic; }
+
+/* ── LEADERSHIP LEAD-IN ── */
+.lead-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-8);
+  flex-wrap: wrap;
+  padding: var(--sp-10) var(--sp-12);
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+}
+.lead-cta h3 { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 600; margin-bottom: var(--sp-2); }
+.lead-cta p { color: var(--text-mid); font-size: 0.98rem; max-width: 46ch; }
 
 /* ── HERITAGE ── */
 .heritage-intro { max-width: 65ch; margin-bottom: var(--sp-10); color: var(--text-mid); line-height: 1.8; font-size: 1.05rem; }
@@ -2946,6 +3090,7 @@ select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmln
 .fam-remove-btn:hover { background: var(--red); color: var(--white); border-color: var(--red); }
 @media (max-width: 640px) {
   .fam-member-row { grid-template-columns: 1fr 1fr; }
+  .focus-grid { grid-template-columns: 1fr; }
 }
 
 /* ── DONATE ── */
@@ -3039,8 +3184,13 @@ select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmln
 
 /* ── RESPONSIVE ── */
 @media (max-width: 1024px) {
-  .mission-grid { grid-template-columns: 1fr; }
-  .tatreez-panel { min-height: auto; margin-top: var(--sp-4); }
+  .mission-grid { grid-template-columns: 1fr; gap: var(--sp-10); }
+  .tatreez-panel { position: static; top: auto; min-height: auto; margin-top: var(--sp-4); order: -1; }
+  .poster-frame { max-width: 380px; }
+  .mission-section::before { display: none; }
+  .story-grid { grid-template-columns: 1fr; gap: var(--sp-10); }
+  .focus-grid { grid-template-columns: repeat(2, 1fr); }
+  .lead-cta { flex-direction: column; align-items: flex-start; padding: var(--sp-8); }
   .contact-layout { grid-template-columns: 1fr; }
   .donate-layout { grid-template-columns: 1fr; }
   .footer-inner { grid-template-columns: 1fr 1fr; }
@@ -4299,13 +4449,15 @@ select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmln
 
   <!-- Mission & Vision -->
   <div class="subpanel active" id="who-mission">
-    <section class="section reveal">
+    <section class="section reveal mission-section">
       <div class="section-inner">
         <div class="mission-grid">
-          <div>
+          <div class="mission-content">
             <div class="section-label" data-en="Our Purpose" data-ar="هدفنا">Our Purpose</div>
             <h2 class="section-title" data-en="Mission &amp; Vision" data-ar="الرسالة والرؤية">Mission &amp; Vision</h2>
+            <p class="mission-lede" data-en="We exist so that no Palestinian family in South Australia stands alone — keeping our culture alive, our people connected, and our identity proud." data-ar="نحن موجودون حتى لا تبقى أي عائلة فلسطينية في جنوب أستراليا وحدها — نُبقي ثقافتنا حية، وشعبنا مترابطًا، وهويتنا فخورة.">We exist so that no Palestinian family in South Australia stands alone — keeping our culture alive, our people connected, and our identity proud.</p>
             <div class="mission-block">
+              <span class="mission-block-num" aria-hidden="true">01</span>
               <div class="mission-icon" aria-hidden="true">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
               </div>
@@ -4315,6 +4467,7 @@ select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmln
               </div>
             </div>
             <div class="mission-block">
+              <span class="mission-block-num" aria-hidden="true">02</span>
               <div class="mission-icon" aria-hidden="true">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
               </div>
@@ -4324,6 +4477,7 @@ select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmln
               </div>
             </div>
             <div class="mission-block">
+              <span class="mission-block-num" aria-hidden="true">03</span>
               <div class="mission-icon" aria-hidden="true">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
               </div>
@@ -4333,17 +4487,61 @@ select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmln
               </div>
             </div>
           </div>
-          <div class="tatreez-panel">
-            <div class="tatreez-stripe" aria-hidden="true"></div>
-            <div class="tatreez-quote">
-              <div class="quote-mark" aria-hidden="true">&ldquo;</div>
-              <blockquote data-en="We carry our home with us: in our language, our food, and the stories we pass on to our children." data-ar="نحمل وطننا معنا: في لغتنا وطعامنا والقصص التي نرويها لأبنائنا.">We carry our home with us: in our language, our food, and the stories we pass on to our children.</blockquote>
-              <cite>Glimmer of Hope<span data-en="Palestinian Community · South Australia" data-ar="المجتمع الفلسطيني · جنوب أستراليا">Palestinian Community · South Australia</span></cite>
+          <aside class="tatreez-panel">
+            <figure class="poster-frame">
+              <img class="tatreez-poster" src="image3.png" loading="lazy" decoding="async" alt="Embroidered tatreez artwork of the map of Palestine framed by olive branches, with the Arabic words Palestine — Land, People and History" data-alt-ar="عمل فني بالتطريز يصوّر خريطة فلسطين محاطة بأغصان الزيتون مع عبارة فلسطين أرض وشعب وتاريخ">
+            </figure>
+            <figcaption class="poster-caption">
+              <span class="ar-line">فلسطين — أرض وشعب وتاريخ</span>
+              <span data-en="Palestine — Land, People &amp; History" data-ar="">Palestine — Land, People &amp; History</span>
+            </figcaption>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- Our Story / Timeline -->
+    <section class="section reveal" style="border-top:1px solid var(--border);">
+      <div class="section-inner">
+        <div class="story-grid">
+          <div class="story-intro">
+            <div class="section-label" data-en="Our Story" data-ar="قصتنا">Our Story</div>
+            <h2 class="section-title" data-en="A decade of building belonging" data-ar="عقد من بناء الانتماء">A decade of building belonging</h2>
+            <p data-en="Glimmer of Hope began in 2016 with a simple idea: that no Palestinian family arriving in South Australia should feel alone. What started as a handful of families sharing meals and helping newcomers find their feet has grown into one of the state's most active Palestinian community organisations." data-ar="بدأت جمعية بصيص أمل عام 2016 بفكرة بسيطة: ألا تشعر أي عائلة فلسطينية تصل إلى جنوب أستراليا بالوحدة. وما بدأ كحفنة من العائلات تتشارك الطعام وتساعد القادمين الجدد على الاستقرار، أصبح واحدة من أنشط المنظمات المجتمعية الفلسطينية في الولاية.">Glimmer of Hope began in 2016 with a simple idea: that no Palestinian family arriving in South Australia should feel alone. What started as a handful of families sharing meals and helping newcomers find their feet has grown into one of the state's most active Palestinian community organisations.</p>
+            <p data-en="Today we run cultural events, youth and language programs, and practical settlement support — all powered by volunteers who give their time so the next generation grows up proud of who they are." data-ar="اليوم نُقيم الفعاليات الثقافية وبرامج الشباب واللغة والدعم العملي للاستقرار — كلها بجهود متطوعين يمنحون وقتهم كي ينشأ الجيل القادم فخورًا بهويته.">Today we run cultural events, youth and language programs, and practical settlement support — all powered by volunteers who give their time so the next generation grows up proud of who they are.</p>
+            <div class="story-sign" data-en="Built by the community, for the community." data-ar="بُنيت من المجتمع، للمجتمع.">Built by the community, for the community.</div>
+          </div>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-year">2016</div>
+              <h4 data-en="Where it began" data-ar="حيث بدأنا">Where it began</h4>
+              <p data-en="A group of Palestinian families in Adelaide come together to welcome new arrivals and keep their culture alive." data-ar="مجموعة من العائلات الفلسطينية في أديلايد تجتمع لاستقبال القادمين الجدد والحفاظ على ثقافتهم.">A group of Palestinian families in Adelaide come together to welcome new arrivals and keep their culture alive.</p>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-year">2018</div>
+              <h4 data-en="Culture takes root" data-ar="الثقافة تتجذّر">Culture takes root</h4>
+              <p data-en="Regular Dabkeh, Arabic classes and cultural nights begin bringing the community together throughout the year." data-ar="انطلاق دروس الدبكة والعربية والأمسيات الثقافية بانتظام لتجمع المجتمع معًا على مدار العام.">Regular Dabkeh, Arabic classes and cultural nights begin bringing the community together throughout the year.</p>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-year">2020</div>
+              <h4 data-en="Standing together" data-ar="نقف معًا">Standing together</h4>
+              <p data-en="Through difficult years, GOH expands practical support for families — food relief, settlement help and staying connected." data-ar="خلال سنوات صعبة، توسّع الجمعية الدعم العملي للعائلات — من المساعدة الغذائية إلى دعم الاستقرار والتواصل.">Through difficult years, GOH expands practical support for families — food relief, settlement help and staying connected.</p>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-year">2022</div>
+              <h4 data-en="A growing family" data-ar="عائلة تكبر">A growing family</h4>
+              <p data-en="More families find a home with GOH, growing the community to hundreds of members across South Australia." data-ar="المزيد من العائلات تجد بيتها مع الجمعية، لينمو المجتمع إلى مئات الأعضاء في أنحاء جنوب أستراليا.">More families find a home with GOH, growing the community to hundreds of members across South Australia.</p>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-year" data-en="Today" data-ar="اليوم">Today</div>
+              <h4 data-en="Looking forward" data-ar="نتطلع للأمام">Looking forward</h4>
+              <p data-en="New youth programs, partnerships and events strengthen the next generation's connection to Palestine." data-ar="برامج شبابية وشراكات وفعاليات جديدة تقوّي ارتباط الجيل القادم بفلسطين.">New youth programs, partnerships and events strengthen the next generation's connection to Palestine.</p>
             </div>
           </div>
         </div>
       </div>
     </section>
+
     <section class="section reveal" style="background:var(--cream);">
       <div class="section-inner" style="text-align:center;">
         <div class="section-label" style="justify-content:center;" data-en="By The Numbers" data-ar="بالأرقام">By The Numbers</div>
@@ -4356,6 +4554,66 @@ select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmln
         </div>
       </div>
     </section>
+
+    <!-- What we focus on -->
+    <section class="section reveal">
+      <div class="section-inner">
+        <div class="section-label" data-en="What We Do" data-ar="ماذا نفعل">What We Do</div>
+        <h2 class="section-title" style="margin-bottom:var(--sp-10);" data-en="Four ways we serve our community" data-ar="أربع طرق نخدم بها مجتمعنا">Four ways we serve our community</h2>
+        <div class="focus-grid">
+          <div class="focus-card">
+            <div class="focus-ic" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l2.6 7.9H22l-6.2 4.6 2.4 7.5L12 17.4 5.8 22l2.4-7.5L2 9.9h7.4z"/></svg>
+            </div>
+            <h3 data-en="Culture &amp; Heritage" data-ar="الثقافة والتراث">Culture &amp; Heritage</h3>
+            <p data-en="Dabkeh, tatreez, music and storytelling — we keep Palestinian traditions living and shared across generations." data-ar="الدبكة والتطريز والموسيقى ورواية القصص — نُبقي التقاليد الفلسطينية حيّة ومتوارثة بين الأجيال.">Dabkeh, tatreez, music and storytelling — we keep Palestinian traditions living and shared across generations.</p>
+          </div>
+          <div class="focus-card">
+            <div class="focus-ic" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.8 5.6a5 5 0 0 0-7.1 0L12 7.3l-1.7-1.7a5 5 0 1 0-7.1 7.1L12 21.5l8.8-8.8a5 5 0 0 0 0-7.1z"/></svg>
+            </div>
+            <h3 data-en="Settlement &amp; Support" data-ar="الاستقرار والدعم">Settlement &amp; Support</h3>
+            <p data-en="Practical help for newcomers — navigating services, finding housing, schools and work, and never feeling lost." data-ar="دعم عملي للقادمين الجدد — التعامل مع الخدمات وإيجاد السكن والمدارس والعمل، دون أن يشعر أحد بالضياع.">Practical help for newcomers — navigating services, finding housing, schools and work, and never feeling lost.</p>
+          </div>
+          <div class="focus-card">
+            <div class="focus-ic" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 10L12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1.3 2.7 2.5 6 2.5s6-1.2 6-2.5v-5"/></svg>
+            </div>
+            <h3 data-en="Youth &amp; Education" data-ar="الشباب والتعليم">Youth &amp; Education</h3>
+            <p data-en="Arabic classes, mentoring and youth programs so the next generation stays connected to language and identity." data-ar="دروس عربية وإرشاد وبرامج شبابية كي يبقى الجيل القادم مرتبطًا بلغته وهويته.">Arabic classes, mentoring and youth programs so the next generation stays connected to language and identity.</p>
+          </div>
+          <div class="focus-card">
+            <div class="focus-ic" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <h3 data-en="Community &amp; Events" data-ar="المجتمع والفعاليات">Community &amp; Events</h3>
+            <p data-en="Festivals, dinners and gatherings that bring families together and welcome friends of Palestine." data-ar="مهرجانات وعشاءات ولقاءات تجمع العائلات وترحّب بأصدقاء فلسطين.">Festivals, dinners and gatherings that bring families together and welcome friends of Palestine.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- What we believe -->
+    <section class="section reveal belief-band">
+      <div class="section-inner belief-inner">
+        <div class="eyebrow-light" data-en="What We Believe" data-ar="بماذا نؤمن">What We Believe</div>
+        <p><span data-en="Culture is resistance. Community is strength. And " data-ar="الثقافة مقاومة. والمجتمع قوة. و">Culture is resistance. Community is strength. And </span><span class="hl" data-en="every family deserves to belong" data-ar="كل عائلة تستحق أن تنتمي">every family deserves to belong</span><span data-en=" — wherever they are in the world." data-ar=" — أينما كانوا في العالم."> — wherever they are in the world.</span></p>
+      </div>
+    </section>
+
+    <!-- Meet the team lead-in -->
+    <section class="section reveal" style="background:var(--cream);">
+      <div class="section-inner">
+        <div class="lead-cta">
+          <div>
+            <h3 data-en="Meet the people behind GOH" data-ar="تعرّف على من يقفون خلف الجمعية">Meet the people behind GOH</h3>
+            <p data-en="Our work is powered by a volunteer executive committee and dozens of helping hands across South Australia." data-ar="عملنا تقوده لجنة تنفيذية تطوعية وعشرات الأيادي المتعاونة في أنحاء جنوب أستراليا.">Our work is powered by a volunteer executive committee and dozens of helping hands across South Australia.</p>
+          </div>
+          <button class="btn-primary" onclick="showSubtab('who','committee', document.querySelectorAll('#page-who .subtab')[1])" data-en="Meet the Committee" data-ar="تعرّف على اللجنة">Meet the Committee</button>
+        </div>
+      </div>
+    </section>
+
   </div>
 
   <!-- Executive Committee -->
