@@ -2440,55 +2440,215 @@ select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmln
 }
 .form-privacy-note svg { flex-shrink: 0; margin-top: 2px; color: var(--green); }
 
-/* Business register CTA */
-.biz-register-cta {
-  position: relative;
-  overflow: hidden;
-  margin-top: var(--sp-8);
-  background: linear-gradient(135deg, #00472a 0%, var(--green) 55%, #00583a 100%);
-  border: 1px solid rgba(201,168,76,0.45);
-  border-radius: var(--r-lg);
-  padding: var(--sp-9) var(--sp-10);
-  box-shadow: 0 22px 54px rgba(0,92,52,0.22);
+/* ── Business Page — Premium Design ─────────────────────── */
+.biz-page-hero {
+  background: linear-gradient(135deg, var(--black) 0%, #0d1a10 55%, #0B0C0E 100%);
+  position: relative; overflow: hidden;
+  padding: var(--sp-14) 0 var(--sp-12);
+  text-align: center;
 }
-.biz-register-cta::before {
-  content: '';
-  position: absolute;
-  top: -70px;
-  inset-inline-end: -70px;
-  width: 260px; height: 260px;
-  background: repeating-linear-gradient(45deg, rgba(255,255,255,0.06) 0 2px, transparent 2px 14px);
-  border-radius: 50%;
-  pointer-events: none;
+.biz-page-hero-inner {
+  position: relative; z-index: 2;
+  max-width: 860px; margin: 0 auto;
+  padding: 0 var(--sp-6);
 }
-.biz-register-inner {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  align-items: center;
+.biz-hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 700; color: var(--white);
+  line-height: 1.15;
+  margin: var(--sp-3) 0 var(--sp-5);
+}
+.biz-hero-title em { font-style: italic; color: var(--gold); }
+.biz-page-hero-inner > p {
+  color: rgba(250,250,248,0.7); font-size: 0.88rem;
+  max-width: 48ch; margin: 0 auto var(--sp-8); line-height: 1.7;
+}
+.biz-hero-stats {
+  display: inline-flex; align-items: center; gap: var(--sp-8);
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 999px; padding: var(--sp-5) var(--sp-10);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+}
+.biz-hero-stat { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.biz-stat-num {
+  font-size: 1.1rem; font-weight: 800;
+  color: var(--gold); line-height: 1;
+  font-family: 'Playfair Display', serif;
+}
+.biz-hero-stat-label {
+  font-size: 0.68rem; letter-spacing: 0.1em;
+  text-transform: uppercase; color: rgba(255,255,255,0.5);
+  white-space: nowrap;
+}
+.biz-hero-divider { width: 1px; height: 40px; background: rgba(255,255,255,0.15); flex-shrink: 0; }
+.biz-hero-bg {
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(circle at 8% 50%, rgba(0,92,52,0.28) 0%, transparent 48%),
+    radial-gradient(circle at 92% 25%, rgba(201,168,76,0.10) 0%, transparent 42%),
+    radial-gradient(circle at 50% 105%, rgba(200,16,46,0.07) 0%, transparent 38%);
+}
+/* Category Filter Bar */
+.biz-filter-bar {
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  padding: var(--sp-4) 0;
+  position: sticky; top: 64px; z-index: 20;
+}
+.biz-filters { display: flex; gap: var(--sp-2); flex-wrap: wrap; }
+.biz-filter {
+  display: inline-flex; align-items: center;
+  padding: 7px 18px; border-radius: 999px;
+  border: 1.5px solid var(--border);
+  background: transparent; color: var(--text-mid);
+  font-size: 0.83rem; font-weight: 600;
+  cursor: pointer; white-space: nowrap;
+  font-family: inherit;
+  transition: all 0.18s ease;
+}
+.biz-filter:hover { border-color: var(--green); color: var(--green); background: rgba(0,92,52,0.04); }
+.biz-filter.active { background: var(--green); border-color: var(--green); color: #fff; }
+/* Premium Business Grid */
+.biz-premium-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(285px, 1fr));
   gap: var(--sp-6);
+  padding: var(--sp-4) 0 var(--sp-6);
 }
-.biz-register-icon {
-  width: 60px; height: 60px;
-  background: rgba(255,255,255,0.12);
-  border: 1px solid rgba(255,255,255,0.28);
-  border-radius: var(--r-lg);
+/* Premium Business Card */
+.biz-premium-card {
+  background: var(--white); border-radius: 16px;
+  border: 1.5px solid var(--border);
+  padding: var(--sp-6); position: relative;
+  overflow: hidden; display: flex; flex-direction: column;
+  transition: transform 0.25s cubic-bezier(0.34,1.3,0.64,1), box-shadow 0.25s ease, border-color 0.25s ease;
+}
+.biz-premium-card::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; right: 0; height: 3px;
+  background: var(--green);
+  transition: height 0.2s ease;
+}
+.biz-premium-card.cat-food::before    { background: linear-gradient(90deg, var(--red), #e84040); }
+.biz-premium-card.cat-retail::before  { background: linear-gradient(90deg, var(--gold), #c9882a); }
+.biz-premium-card.cat-professional::before { background: linear-gradient(90deg, #1a6b45, var(--green)); }
+.biz-premium-card:hover { transform: translateY(-5px); box-shadow: 0 24px 56px rgba(0,0,0,0.11); border-color: rgba(0,92,52,0.2); }
+.biz-premium-card:hover::before { height: 4px; }
+.biz-card-top {
+  display: flex; align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: var(--sp-4); gap: var(--sp-3);
+}
+.biz-card-icon {
+  width: 50px; height: 50px; border-radius: 13px;
+  background: linear-gradient(135deg, rgba(0,92,52,0.09) 0%, rgba(0,92,52,0.04) 100%);
   display: flex; align-items: center; justify-content: center;
-  color: var(--gold-light);
-  flex-shrink: 0;
+  flex-shrink: 0; color: var(--green);
 }
-.biz-register-text { flex: 1; }
-.biz-register-text h3 { font-family: 'Playfair Display', serif; font-size: 1.45rem; font-weight: 600; color: #fff; margin-bottom: var(--sp-2); }
-.biz-register-text p { font-size: 0.92rem; color: rgba(250,250,248,0.85); line-height: 1.7; max-width: 55ch; }
-.biz-register-actions { display: flex; flex-direction: column; gap: var(--sp-3); align-items: flex-start; flex-shrink: 0; }
-.biz-register-actions .btn-primary { background: var(--gold-light); color: var(--black); border-color: var(--gold-light); }
-.biz-register-actions .btn-primary:hover { background: #fff; border-color: #fff; color: var(--black); }
-.biz-register-actions .btn-ghost { color: rgba(255,255,255,0.82) !important; }
-.biz-register-actions .btn-ghost:hover { color: #fff !important; }
-@media (max-width: 768px) {
-  .biz-register-cta { padding: var(--sp-7) var(--sp-6); }
-  .biz-register-inner { flex-direction: column; align-items: flex-start; gap: var(--sp-5); }
-  .biz-register-actions { flex-direction: row; align-items: center; }
+.biz-premium-card.cat-food .biz-card-icon   { background: rgba(200,16,46,0.07); color: var(--red); }
+.biz-premium-card.cat-retail .biz-card-icon { background: rgba(201,168,76,0.1); color: #9a7020; }
+.biz-card-cat {
+  font-size: 0.7rem; font-weight: 700;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 4px 10px; border-radius: 999px;
+  background: rgba(0,92,52,0.08); color: var(--green);
+  white-space: nowrap;
+}
+.biz-premium-card.cat-food .biz-card-cat   { background: rgba(200,16,46,0.08); color: #a3122b; }
+.biz-premium-card.cat-retail .biz-card-cat { background: rgba(201,168,76,0.12); color: #7a5a10; }
+.biz-card-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem; font-weight: 700;
+  color: var(--black); margin-bottom: var(--sp-1); line-height: 1.3;
+}
+.biz-card-suburb {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 0.77rem; color: var(--text-muted); margin-bottom: var(--sp-3);
+}
+.biz-card-suburb svg { flex-shrink: 0; }
+.biz-card-desc {
+  font-size: 0.875rem; color: var(--text-mid); line-height: 1.65;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+  overflow: hidden; flex: 1; margin-bottom: var(--sp-4);
+}
+.biz-card-person {
+  font-size: 0.77rem; color: var(--text-muted);
+  font-style: italic; line-height: 1.5; padding-bottom: var(--sp-3);
+}
+.biz-card-footer {
+  display: flex; flex-wrap: wrap; gap: 6px;
+  padding-top: var(--sp-4); border-top: 1px solid var(--border); margin-top: auto;
+}
+.biz-card-lnk {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 0.78rem; font-weight: 600; color: var(--green);
+  text-decoration: none; padding: 5px 11px; border-radius: 8px;
+  background: rgba(0,92,52,0.07);
+  transition: background 0.15s, color 0.15s;
+}
+.biz-card-lnk:hover { background: var(--green); color: #fff; }
+.biz-card-lnk.lnk-phone { color: var(--black); background: var(--cream); }
+.biz-card-lnk.lnk-phone:hover { background: var(--black); color: #fff; }
+.biz-card-lnk.lnk-email { color: #1a5faa; background: rgba(26,95,170,0.07); }
+.biz-card-lnk.lnk-email:hover { background: #1a5faa; color: #fff; }
+/* Empty State */
+.biz-empty {
+  text-align: center; padding: var(--sp-16) 0 var(--sp-10);
+  color: var(--text-muted);
+}
+.biz-empty svg { margin: 0 auto var(--sp-4); display: block; opacity: 0.3; }
+.biz-empty p { font-size: 0.95rem; }
+/* List Your Business CTA */
+.biz-cta-section { background: var(--cream); padding: var(--sp-14) 0; margin-top: var(--sp-2); }
+.biz-cta-band {
+  display: grid; grid-template-columns: 1fr auto;
+  gap: var(--sp-10); align-items: center;
+  background: var(--white); border-radius: 20px;
+  padding: var(--sp-10); box-shadow: 0 4px 32px rgba(0,0,0,0.07);
+  border: 1px solid var(--border);
+  position: relative; overflow: hidden;
+}
+.biz-cta-band::after {
+  content: ''; position: absolute;
+  top: 0; left: 0; bottom: 0; width: 4px;
+  background: linear-gradient(180deg, var(--green) 0%, var(--gold) 100%);
+  border-radius: 20px 0 0 20px;
+}
+.biz-cta-text .section-label { margin-bottom: var(--sp-2); }
+.biz-cta-text h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.75rem; font-weight: 700;
+  color: var(--black); margin-bottom: var(--sp-3);
+}
+.biz-cta-text > p {
+  font-size: 0.82rem; color: var(--text-mid);
+  max-width: 50ch; line-height: 1.7; margin-bottom: var(--sp-5);
+}
+.biz-cta-perks { display: flex; flex-wrap: wrap; gap: var(--sp-4); }
+.biz-cta-perk {
+  display: flex; align-items: center; gap: 7px;
+  font-size: 0.82rem; font-weight: 600; color: var(--green);
+}
+.biz-cta-perk svg { flex-shrink: 0; }
+.biz-cta-side {
+  display: flex; flex-direction: column;
+  align-items: center; gap: var(--sp-3);
+  min-width: 190px; text-align: center;
+}
+.biz-cta-btn {
+  width: 100%; padding: 15px 28px;
+  font-size: 0.97rem; font-weight: 700; border-radius: 12px; cursor: pointer;
+}
+.biz-cta-note { font-size: 0.76rem; color: var(--text-muted); line-height: 1.5; max-width: 18ch; }
+@media (max-width: 900px) {
+  .biz-cta-band { grid-template-columns: 1fr; }
+  .biz-cta-side { align-items: stretch; }
+}
+@media (max-width: 700px) {
+  .biz-hero-stats { flex-wrap: wrap; gap: var(--sp-3); padding: var(--sp-3) var(--sp-5); }
+  .biz-premium-grid { grid-template-columns: 1fr; }
 }
 
 .kids-grid, .biz-grid {
@@ -2566,9 +2726,21 @@ select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmln
 }
 .sort-btn:hover, .sort-btn.active { background: var(--black); color: var(--white); border-color: var(--black); }
 .ev-list { display: flex; flex-direction: column; gap: var(--sp-4); }
+/* event cover photo banner */
+.ev-cover {
+  height: 200px; border-radius: var(--r-md) var(--r-md) 0 0;
+  background-size: cover; background-position: center;
+  background-color: var(--border-mid);
+  margin: calc(-1 * var(--sp-5)) calc(-1 * var(--sp-5)) 0;
+  width: calc(100% + 2 * var(--sp-5));
+  flex-shrink: 0;
+}
+/* inner row: date-box | content */
+.ev-card-body { display: flex; gap: var(--sp-5); align-items: flex-start; }
 .ev-card {
   display: flex;
-  gap: var(--sp-5);
+  flex-direction: column;
+  gap: var(--sp-4);
   padding: var(--sp-5);
   border: 1px solid var(--border);
   border-radius: var(--r-lg);
@@ -5215,30 +5387,71 @@ svg.cc-tick { width: 14px; height: 14px; flex-shrink: 0; }
 
   <!-- Local Businesses -->
   <div class="subpanel" id="what-biz">
-    <section class="section reveal">
-      <div class="section-inner">
-        <div class="section-label" data-en="Community Directory" data-ar="دليل المجتمع">Community Directory</div>
-        <h2 class="section-title" data-en="Palestinian Local Businesses" data-ar="الأعمال التجارية الفلسطينية المحلية">Palestinian Local Businesses</h2>
-        <p style="max-width:60ch;margin-bottom:var(--sp-8);color:var(--text-mid);" data-en="Support Palestinian-owned businesses in South Australia. Contact us to list your business for free." data-ar="ادعم الأعمال المملوكة للفلسطينيين في جنوب أستراليا. تواصل معنا لإدراج عملك مجاناً.">Support Palestinian-owned businesses in South Australia. Contact us to list your business for free.</p>
-        <div class="biz-grid" id="bizGrid"><!-- rendered by renderBusinesses() --></div>
 
-        <div class="biz-register-cta">
-          <div class="biz-register-inner">
-            <div class="biz-register-icon">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+    <!-- Premium Hero Band -->
+    <div class="biz-page-hero">
+      <div class="biz-hero-bg" aria-hidden="true"></div>
+      <div class="biz-page-hero-inner">
+        <h2 class="biz-hero-title">
+          <span data-en="Palestinian Businesses" data-ar="الأعمال الفلسطينية">Palestinian Businesses</span><br>
+          <em><span data-en="in South Australia" data-ar="في جنوب أستراليا">in South Australia</span></em>
+        </h2>
+      </div>
+    </div>
+
+    <!-- Category Filter Bar -->
+    <div class="biz-filter-bar">
+      <div class="section-inner">
+        <div class="biz-filters">
+          <button class="biz-filter active" onclick="filterBiz('all',this)" data-en="All Businesses" data-ar="جميع الأعمال">All Businesses</button>
+          <button class="biz-filter" onclick="filterBiz('food',this)" data-en="Food &amp; Hospitality" data-ar="الطعام والضيافة">Food &amp; Hospitality</button>
+          <button class="biz-filter" onclick="filterBiz('retail',this)" data-en="Retail &amp; Imports" data-ar="التجزئة والاستيراد">Retail &amp; Imports</button>
+          <button class="biz-filter" onclick="filterBiz('professional',this)" data-en="Professional Services" data-ar="الخدمات المهنية">Professional Services</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Business Grid -->
+    <section class="section" style="padding:0;">
+      <div class="section-inner">
+        <div class="biz-premium-grid" id="bizGrid"><!-- rendered by renderBusinesses() --></div>
+        <div class="biz-empty" id="bizEmpty" style="display:none;">
+          <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <p data-en="No businesses in this category yet." data-ar="لا توجد أعمال في هذه الفئة بعد.">No businesses in this category yet.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- List Your Business CTA -->
+    <section class="biz-cta-section">
+      <div class="section-inner">
+        <div class="biz-cta-band">
+          <div class="biz-cta-text">
+            <div class="section-label" data-en="Free Listing" data-ar="إدراج مجاني">Free Listing</div>
+            <h3 data-en="List Your Business" data-ar="أضف عملك التجاري">List Your Business</h3>
+            <p data-en="Own a Palestinian business in South Australia? Join our community directory for free — listed within 48 hours, promoted at every GOH event." data-ar="هل تمتلك عملاً تجارياً فلسطينياً في جنوب أستراليا؟ انضم إلى دليلنا مجاناً — مُدرج خلال 48 ساعة.">Own a Palestinian business in South Australia? Join our community directory for free — listed within 48 hours, promoted at every GOH event.</p>
+            <div class="biz-cta-perks">
+              <span class="biz-cta-perk">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                <span data-en="100% Free" data-ar="مجاني 100%">100% Free</span>
+              </span>
+              <span class="biz-cta-perk">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                <span data-en="1,000+ Community Members" data-ar="أكثر من 1,000 عضو">1,000+ Community Members</span>
+              </span>
+              <span class="biz-cta-perk">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                <span data-en="Listed within 48 Hours" data-ar="مُدرج خلال 48 ساعة">Listed within 48 Hours</span>
+              </span>
             </div>
-            <div class="biz-register-text">
-              <h3 data-en="Register Your Business" data-ar="سجّل عملك التجاري">Register Your Business</h3>
-              <p data-en="Are you a Palestinian business owner in South Australia? Get listed in our community directory for free and connect with thousands of community members." data-ar="هل أنت صاحب عمل فلسطيني في جنوب أستراليا؟ أدرج عملك في دليل مجتمعنا مجاناً وتواصل مع آلاف أفراد المجتمع.">Are you a Palestinian business owner in South Australia? Get listed in our community directory for free and connect with thousands of community members.</p>
-            </div>
-            <div class="biz-register-actions">
-              <a href="mailto:glimmerofhopesa@gmail.com?subject=Business%20Directory%20Listing%20Request" class="btn btn-primary" style="white-space:nowrap;" data-en="Contact Us to Register" data-ar="تواصل معنا للتسجيل">Contact Us to Register</a>
-              <a href="mailto:glimmerofhopesa@gmail.com" class="btn btn-ghost" style="font-size:0.82rem;white-space:nowrap;" aria-label="Email us">glimmerofhopesa@gmail.com</a>
-            </div>
+          </div>
+          <div class="biz-cta-side">
+            <button class="btn btn-primary biz-cta-btn" onclick="nav('contact')" data-en="Contact Us to List" data-ar="تواصل معنا للإدراج">Contact Us to List</button>
           </div>
         </div>
       </div>
     </section>
+
   </div>
 </div><!-- /page-what -->
 
@@ -6146,15 +6359,16 @@ svg.cc-tick { width: 14px; height: 14px; flex-shrink: 0; }
         <!-- Payment method tabs -->
         <p class="pay-section-title" data-en="Choose Payment Method" data-ar="اختر طريقة الدفع">Choose Payment Method</p>
         <div class="pay-method-row" id="payMethodRow">
-          <label class="pay-method-opt pm-active" onclick="showPayPanel('card',this)">
-            <input type="radio" name="payMethod" value="card" checked style="display:none">
+          <label class="pay-method-opt pm-disabled" aria-disabled="true" title="Card payment coming soon">
+            <input type="radio" name="payMethod" value="card" disabled style="display:none">
             <div class="pay-method-icon">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
             </div>
             <span data-en="Credit / Debit Card" data-ar="بطاقة ائتمان">Credit / Debit Card</span>
+            <span class="pm-soon-badge">Coming Soon</span>
           </label>
-          <label class="pay-method-opt" onclick="showPayPanel('bank',this)">
-            <input type="radio" name="payMethod" value="bank" style="display:none">
+          <label class="pay-method-opt pm-active" onclick="showPayPanel('bank',this)">
+            <input type="radio" name="payMethod" value="bank" checked style="display:none">
             <div class="pay-method-icon">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg>
             </div>
@@ -6162,80 +6376,8 @@ svg.cc-tick { width: 14px; height: 14px; flex-shrink: 0; }
           </label>
         </div>
 
-        <!-- ── PANEL: Card ── -->
-        <div id="payPanelCard" class="pay-panel">
-          <!-- CBA badge -->
-          <div class="pay-bank-badge">
-            <div class="pay-bank-logo">
-              <div class="pay-bank-mark">CBA</div>
-              <div>
-                <div style="font-weight:700;font-size:.88rem;color:#1a1a1a;" data-en="Commonwealth Bank" data-ar="بنك الكومنولث">Commonwealth Bank</div>
-                <div style="font-size:.72rem;color:#555;font-weight:500;" data-en="Secured Payment Gateway — CommWeb" data-ar="بوابة دفع آمنة — CommWeb">Secured Payment Gateway — CommWeb</div>
-              </div>
-            </div>
-            <div class="pay-ssl">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
-              256-bit SSL Secured
-            </div>
-          </div>
-
-          <!-- Cardholder name -->
-          <div class="form-group" style="margin-bottom:var(--sp-4);">
-            <label data-en="Cardholder Name *" data-ar="اسم حامل البطاقة *">Cardholder Name *</label>
-            <input type="text" id="payCardName" placeholder="Name as shown on card" autocomplete="cc-name" oninput="clearFieldErr(this)">
-            <span class="field-error-msg" data-en="Cardholder name is required." data-ar="اسم حامل البطاقة مطلوب.">Cardholder name is required.</span>
-          </div>
-
-          <!-- Card number -->
-          <div class="form-group" style="margin-bottom:var(--sp-4);">
-            <label data-en="Card Number *" data-ar="رقم البطاقة *">Card Number *</label>
-            <div class="pay-cardnum-wrap">
-              <input type="text" id="payCardNum" placeholder="0000  0000  0000  0000" maxlength="19" inputmode="numeric" autocomplete="cc-number" oninput="formatCardNum(this);clearFieldErr(this)">
-              <div class="pay-card-icons" aria-hidden="true">
-                <svg class="card-logo-svg" viewBox="0 0 38 24" xmlns="http://www.w3.org/2000/svg" aria-label="Visa"><rect width="38" height="24" rx="3" fill="white" stroke="#d0d0d0" stroke-width="1"/><text x="19" y="17" text-anchor="middle" font-family="'Helvetica Neue',Arial,sans-serif" font-size="13" font-weight="900" font-style="italic" fill="#1A1F71">VISA</text></svg>
-                <svg class="card-logo-svg" viewBox="0 0 38 24" xmlns="http://www.w3.org/2000/svg" aria-label="Mastercard"><rect width="38" height="24" rx="3" fill="white" stroke="#d0d0d0" stroke-width="1"/><circle cx="14" cy="12" r="7" fill="#EB001B"/><circle cx="24" cy="12" r="7" fill="#F79E1B"/><path d="M19 7.1 A7 7 0 0 0 19 16.9 A7 7 0 0 1 19 7.1Z" fill="#FF5F00"/></svg>
-              </div>
-            </div>
-            <span class="field-error-msg" data-en="A valid 16-digit card number is required." data-ar="رقم بطاقة مكوّن من 16 رقماً مطلوب.">A valid 16-digit card number is required.</span>
-          </div>
-
-          <!-- Expiry + CVV -->
-          <div class="pay-cvv-row" style="margin-bottom:var(--sp-4);">
-            <div class="form-group">
-              <label data-en="Expiry (MM / YY) *" data-ar="تاريخ الانتهاء *">Expiry (MM / YY) *</label>
-              <input type="text" id="payCardExp" placeholder="MM / YY" maxlength="7" inputmode="numeric" autocomplete="cc-exp" oninput="formatCardExp(this);clearFieldErr(this)">
-              <span class="field-error-msg" data-en="Valid expiry date is required." data-ar="تاريخ انتهاء صالح مطلوب.">Valid expiry date is required.</span>
-            </div>
-            <div class="form-group">
-              <label data-en="CVV / CVC *" data-ar="رمز الأمان *">CVV / CVC *
-                <span title="3 digits on back of card (Amex: 4 digits on front)" style="cursor:help;color:var(--text-muted);font-size:11px;font-weight:400;margin-left:4px;" data-en="(3–4 digits on card)" data-ar="(3-4 أرقام)">(3–4 digits)</span>
-              </label>
-              <div class="pay-cvv-wrap">
-                <input type="password" id="payCardCvv" placeholder="•••" maxlength="4" inputmode="numeric" autocomplete="cc-csc" oninput="clearFieldErr(this)">
-                <button class="pay-cvv-toggle" type="button" onclick="toggleCvvVis()" aria-label="Show/hide CVV">
-                  <svg id="cvvEyeIcon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-                </button>
-              </div>
-              <span class="field-error-msg" data-en="CVV is required." data-ar="رمز الأمان مطلوب.">CVV is required.</span>
-            </div>
-          </div>
-
-          <!-- Accepted cards + PCI -->
-          <div class="pay-brand-row">
-            <div style="display:flex;gap:6px;align-items:center;">
-              <svg class="card-logo-svg" viewBox="0 0 38 24" xmlns="http://www.w3.org/2000/svg" aria-label="Visa"><rect width="38" height="24" rx="3" fill="white" stroke="#d0d0d0" stroke-width="1"/><text x="19" y="17" text-anchor="middle" font-family="'Helvetica Neue',Arial,sans-serif" font-size="13" font-weight="900" font-style="italic" fill="#1A1F71">VISA</text></svg>
-              <svg class="card-logo-svg" viewBox="0 0 38 24" xmlns="http://www.w3.org/2000/svg" aria-label="Mastercard"><rect width="38" height="24" rx="3" fill="white" stroke="#d0d0d0" stroke-width="1"/><circle cx="14" cy="12" r="7" fill="#EB001B"/><circle cx="24" cy="12" r="7" fill="#F79E1B"/><path d="M19 7.1 A7 7 0 0 0 19 16.9 A7 7 0 0 1 19 7.1Z" fill="#FF5F00"/></svg>
-              <svg class="card-logo-svg" viewBox="0 0 38 24" xmlns="http://www.w3.org/2000/svg" aria-label="American Express"><rect width="38" height="24" rx="3" fill="#016FD0"/><text x="19" y="16" text-anchor="middle" font-family="'Helvetica Neue',Arial,sans-serif" font-size="8.5" font-weight="700" fill="white" letter-spacing="0.8">AMEX</text></svg>
-            </div>
-            <div class="pay-pci">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-              PCI DSS Compliant · SSL Encrypted
-            </div>
-          </div>
-        </div><!-- /payPanelCard -->
-
         <!-- ── PANEL: Bank Transfer ── -->
-        <div id="payPanelBank" class="pay-panel" style="display:none;">
+        <div id="payPanelBank" class="pay-panel">
           <div class="bank-details-card">
             <h4 data-en="Bank Transfer Details" data-ar="تفاصيل الحوالة البنكية">Bank Transfer Details</h4>
             <table class="bank-tbl">
@@ -6362,15 +6504,16 @@ svg.cc-tick { width: 14px; height: 14px; flex-shrink: 0; }
             <!-- ── Payment Method ── -->
             <p class="pay-section-title" data-en="Payment Method" data-ar="طريقة الدفع">Payment Method</p>
             <div class="pay-method-row" id="donPayMethodRow">
-              <label class="pay-method-opt pm-active" onclick="showDonPanel('card',this)">
-                <input type="radio" name="donPayMethod" value="card" checked style="display:none">
+              <label class="pay-method-opt pm-disabled" aria-disabled="true" title="Card payment coming soon">
+                <input type="radio" name="donPayMethod" value="card" disabled style="display:none">
                 <div class="pay-method-icon">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
                 </div>
                 <span data-en="Card" data-ar="بطاقة">Card</span>
+                <span class="pm-soon-badge">Coming Soon</span>
               </label>
-              <label class="pay-method-opt" onclick="showDonPanel('bank',this)">
-                <input type="radio" name="donPayMethod" value="bank" style="display:none">
+              <label class="pay-method-opt pm-active" onclick="showDonPanel('bank',this)">
+                <input type="radio" name="donPayMethod" value="bank" checked style="display:none">
                 <div class="pay-method-icon">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg>
                 </div>
@@ -6378,78 +6521,8 @@ svg.cc-tick { width: 14px; height: 14px; flex-shrink: 0; }
               </label>
             </div>
 
-            <!-- ── Card Panel ── -->
-            <div id="donPanelCard" class="pay-panel">
-              <!-- CBA badge -->
-              <div class="pay-bank-badge">
-                <div class="pay-bank-logo">
-                  <div class="pay-bank-mark">CBA</div>
-                  <div>
-                    <div style="font-weight:700;font-size:.88rem;color:#1a1a1a;" data-en="Commonwealth Bank" data-ar="بنك الكومنولث">Commonwealth Bank</div>
-                    <div style="font-size:.72rem;color:#555;font-weight:500;" data-en="Secured by CommWeb Gateway" data-ar="مؤمَّن بواسطة CommWeb">Secured by CommWeb Gateway</div>
-                  </div>
-                </div>
-                <div class="pay-ssl">
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
-                  256-bit SSL
-                </div>
-              </div>
-
-              <!-- Cardholder -->
-              <div class="form-group" style="margin-bottom:var(--sp-4);">
-                <label data-en="Cardholder Name *" data-ar="اسم حامل البطاقة *">Cardholder Name *</label>
-                <input type="text" id="donCardName" placeholder="Name as shown on card" autocomplete="cc-name" oninput="clearFieldErr(this)">
-                <span class="field-error-msg" data-en="Cardholder name is required." data-ar="اسم حامل البطاقة مطلوب.">Cardholder name is required.</span>
-              </div>
-
-              <!-- Card number -->
-              <div class="form-group" style="margin-bottom:var(--sp-4);">
-                <label data-en="Card Number *" data-ar="رقم البطاقة *">Card Number *</label>
-                <div class="pay-cardnum-wrap">
-                  <input type="text" id="donCardNum" placeholder="0000  0000  0000  0000" maxlength="19" inputmode="numeric" autocomplete="cc-number" oninput="formatCardNum(this);clearFieldErr(this)">
-                  <div class="pay-card-icons" aria-hidden="true">
-                    <svg class="card-logo-svg" viewBox="0 0 38 24" xmlns="http://www.w3.org/2000/svg" aria-label="Visa"><rect width="38" height="24" rx="3" fill="white" stroke="#d0d0d0" stroke-width="1"/><text x="19" y="17" text-anchor="middle" font-family="'Helvetica Neue',Arial,sans-serif" font-size="13" font-weight="900" font-style="italic" fill="#1A1F71">VISA</text></svg>
-                    <svg class="card-logo-svg" viewBox="0 0 38 24" xmlns="http://www.w3.org/2000/svg" aria-label="Mastercard"><rect width="38" height="24" rx="3" fill="white" stroke="#d0d0d0" stroke-width="1"/><circle cx="14" cy="12" r="7" fill="#EB001B"/><circle cx="24" cy="12" r="7" fill="#F79E1B"/><path d="M19 7.1 A7 7 0 0 0 19 16.9 A7 7 0 0 1 19 7.1Z" fill="#FF5F00"/></svg>
-                  </div>
-                </div>
-                <span class="field-error-msg" data-en="Valid 16-digit card number required." data-ar="رقم بطاقة مكوّن من 16 رقماً مطلوب.">Valid 16-digit card number required.</span>
-              </div>
-
-              <!-- Expiry + CVV -->
-              <div class="pay-cvv-row" style="margin-bottom:var(--sp-4);">
-                <div class="form-group">
-                  <label data-en="Expiry (MM / YY) *" data-ar="تاريخ الانتهاء *">Expiry (MM / YY) *</label>
-                  <input type="text" id="donCardExp" placeholder="MM / YY" maxlength="7" inputmode="numeric" autocomplete="cc-exp" oninput="formatCardExp(this);clearFieldErr(this)">
-                  <span class="field-error-msg" data-en="Valid expiry required." data-ar="تاريخ انتهاء صالح مطلوب.">Valid expiry required.</span>
-                </div>
-                <div class="form-group">
-                  <label data-en="CVV *" data-ar="رمز الأمان *">CVV *</label>
-                  <div class="pay-cvv-wrap">
-                    <input type="password" id="donCardCvv" placeholder="•••" maxlength="4" inputmode="numeric" autocomplete="cc-csc" oninput="clearFieldErr(this)">
-                    <button class="pay-cvv-toggle" type="button" onclick="toggleDonCvv()" aria-label="Show/hide CVV">
-                      <svg id="donCvvEye" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-                    </button>
-                  </div>
-                  <span class="field-error-msg" data-en="CVV is required." data-ar="رمز الأمان مطلوب.">CVV is required.</span>
-                </div>
-              </div>
-
-              <!-- Brands + PCI -->
-              <div class="pay-brand-row">
-                <div style="display:flex;gap:6px;align-items:center;">
-                  <svg class="card-logo-svg" viewBox="0 0 38 24" xmlns="http://www.w3.org/2000/svg" aria-label="Visa"><rect width="38" height="24" rx="3" fill="white" stroke="#d0d0d0" stroke-width="1"/><text x="19" y="17" text-anchor="middle" font-family="'Helvetica Neue',Arial,sans-serif" font-size="13" font-weight="900" font-style="italic" fill="#1A1F71">VISA</text></svg>
-                  <svg class="card-logo-svg" viewBox="0 0 38 24" xmlns="http://www.w3.org/2000/svg" aria-label="Mastercard"><rect width="38" height="24" rx="3" fill="white" stroke="#d0d0d0" stroke-width="1"/><circle cx="14" cy="12" r="7" fill="#EB001B"/><circle cx="24" cy="12" r="7" fill="#F79E1B"/><path d="M19 7.1 A7 7 0 0 0 19 16.9 A7 7 0 0 1 19 7.1Z" fill="#FF5F00"/></svg>
-                  <svg class="card-logo-svg" viewBox="0 0 38 24" xmlns="http://www.w3.org/2000/svg" aria-label="American Express"><rect width="38" height="24" rx="3" fill="#016FD0"/><text x="19" y="16" text-anchor="middle" font-family="'Helvetica Neue',Arial,sans-serif" font-size="8.5" font-weight="700" fill="white" letter-spacing="0.8">AMEX</text></svg>
-                </div>
-                <div class="pay-pci">
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                  PCI DSS · SSL Encrypted
-                </div>
-              </div>
-            </div><!-- /donPanelCard -->
-
             <!-- ── Bank Panel ── -->
-            <div id="donPanelBank" class="pay-panel" style="display:none;">
+            <div id="donPanelBank" class="pay-panel">
               <div class="bank-details-card">
                 <h4 data-en="Bank Transfer Details" data-ar="تفاصيل الحوالة البنكية">Bank Transfer Details</h4>
                 <table class="bank-tbl">
@@ -6674,6 +6747,22 @@ svg.cc-tick { width: 14px; height: 14px; flex-shrink: 0; }
   user-select: none;
 }
 .pay-method-opt:hover { border-color: var(--green); color: var(--green); background: var(--green-pale); }
+.pay-method-opt.pm-disabled {
+  opacity: 0.45; cursor: not-allowed;
+  pointer-events: none;
+  border-color: var(--border) !important;
+  background: var(--cream) !important;
+  color: var(--text-muted) !important;
+  position: relative;
+}
+.pm-soon-badge {
+  font-size: 9px; font-weight: 700; letter-spacing: 0.06em;
+  text-transform: uppercase; color: #fff;
+  background: var(--text-muted);
+  border-radius: 999px; padding: 2px 7px;
+  position: absolute; top: 7px; right: 7px;
+  line-height: 1.4;
+}
 .pay-method-opt.pm-active {
   border-color: var(--green);
   background: var(--green-pale);
@@ -7560,41 +7649,65 @@ function renderActivities(){
    LOCAL BUSINESSES  (data + render, with icons)
    ══════════════════════════════════════════════════════════════ */
 const BUSINESSES = [
-  {name:'Al-Quds Bakery', suburb:'Gepps Cross', icon:'food',
+  {name:'Al-Quds Bakery', suburb:'Gepps Cross', icon:'food', cat:'food',
    desc:"Traditional Arabic bread, ka'ak, and pastries. Fresh daily.",
    descAr:'خبز عربي تقليدي وكعك ومعجنات. طازج يومياً.'},
-  {name:'Beit Lahm Restaurant', suburb:'Elizabeth', icon:'food',
+  {name:'Beit Lahm Restaurant', suburb:'Elizabeth', icon:'food', cat:'food',
    desc:'Authentic Palestinian cuisine — musakhan, maqluba and more. Family-run.',
    descAr:'المطبخ الفلسطيني الأصيل — مسخن ومقلوبة وغيرها. عائلي الإدارة.'},
-  {name:'Olive Tree Imports', suburb:'Online & Markets', icon:'globe',
+  {name:'Olive Tree Imports', suburb:'Online & Markets', icon:'globe', cat:'retail',
    desc:"Palestinian olive oil, za'atar, and traditional goods. Sold at SA farmers markets.",
    descAr:'زيت زيتون فلسطيني وزعتر وبضائع تقليدية. يباع في أسواق المزارعين في جنوب أستراليا.'},
-  {name:'Gemini Marketing and Business Solutions', suburb:'Adelaide, SA', icon:'globe',
+  {name:'Gemini Marketing and Business Solutions', suburb:'Adelaide, SA', icon:'globe', cat:'professional',
    desc:'Marketing and customer engagement solutions for businesses and organisations.',
    descAr:'حلول التسويق وإشراك العملاء للشركات والمؤسسات.',
    contact:'Ahmad Darwish AlHajji, CDMP® MAMI CPM FCIM — Director, Marketing & Customer Engagement',
    phone:'+61 432 700 230', email:'ahmad@geminisolutions.com.au',
    link:'https://www.linkedin.com/in/ahmadhaji/', linkLabel:'LinkedIn'}
 ];
-function renderBusinesses(){
+let _bizCat = 'all';
+function filterBiz(cat, btn) {
+  _bizCat = cat;
+  document.querySelectorAll('.biz-filter').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  renderBusinesses();
+}
+function renderBusinesses() {
   const grid = document.getElementById('bizGrid');
-  if(!grid) return;
-  grid.innerHTML = BUSINESSES.map(b => {
-    const tel = b.phone ? b.phone.replace(/[^+\d]/g,'') : '';
+  const empty = document.getElementById('bizEmpty');
+  if (!grid) return;
+  const catLabel = { food:'Food & Hospitality', retail:'Retail & Imports', professional:'Professional Services' };
+  const tel = t => (t || '').replace(/[^+\d]/g, '');
+  let items = BUSINESSES;
+  if (_bizCat !== 'all') items = items.filter(b => (b.cat || 'other') === _bizCat);
+  if (!items.length) {
+    grid.innerHTML = '';
+    if (empty) empty.style.display = 'block';
+    return;
+  }
+  if (empty) empty.style.display = 'none';
+  grid.innerHTML = items.map(b => {
+    const cat = b.cat || 'other';
+    const label = catLabel[cat] || 'Business';
+    const phoneIcon = `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.5a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2.69h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.36a16 16 0 0 0 6.72 6.72l.94-.94a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7a2 2 0 0 1 1.72 2.03z"/></svg>`;
+    const emailIcon = `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>`;
+    const extIcon = `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>`;
+    const pinIcon = `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>`;
     const links = [
-      b.phone ? `<a class="biz-link" href="tel:${tel}">${b.phone}</a>` : '',
-      b.email ? `<a class="biz-link" href="mailto:${b.email}">${b.email}</a>` : '',
-      b.link  ? `<a class="biz-link" href="${b.link}" target="_blank" rel="noopener">${b.linkLabel || 'Website'}</a>` : ''
+      b.phone ? `<a class="biz-card-lnk lnk-phone" href="tel:${tel(b.phone)}">${phoneIcon}${b.phone}</a>` : '',
+      b.email ? `<a class="biz-card-lnk lnk-email" href="mailto:${b.email}">${emailIcon}${b.email}</a>` : '',
+      b.link  ? `<a class="biz-card-lnk" href="${b.link}" target="_blank" rel="noopener">${extIcon}${b.linkLabel || 'Website'}</a>` : ''
     ].filter(Boolean).join('');
-    return `
-    <div class="editable-card">
-      <div class="biz-header">
-        <div class="biz-logo-ph" style="display:flex;align-items:center;justify-content:center;">${gohIconSVG(b.icon || suggestIcon(b.name), 22)}</div>
-        <div><div class="biz-name">${b.name}</div>${b.suburb?`<div style="font-size:12px;color:var(--text-muted);">${b.suburb}</div>`:''}</div>
+    return `<div class="biz-premium-card cat-${cat}">
+      <div class="biz-card-top">
+        <div class="biz-card-icon" aria-hidden="true">${gohIconSVG(b.icon || suggestIcon(b.name), 24)}</div>
+        <span class="biz-card-cat">${label}</span>
       </div>
-      ${b.desc ? `<p class="biz-desc" ${_ea(b.desc, b.descAr)}>${b.desc}</p>` : ''}
-      ${b.contact ? `<div class="biz-contact-person">${b.contact}</div>` : ''}
-      ${links ? `<div class="biz-links">${links}</div>` : ''}
+      <div class="biz-card-name">${b.name}</div>
+      ${b.suburb ? `<div class="biz-card-suburb">${pinIcon}${b.suburb}</div>` : ''}
+      ${b.desc ? `<p class="biz-card-desc" ${_ea(b.desc, b.descAr)}>${b.desc}</p>` : ''}
+      ${b.contact ? `<div class="biz-card-person">${b.contact}</div>` : ''}
+      ${links ? `<div class="biz-card-footer">${links}</div>` : ''}
     </div>`;
   }).join('');
   _reLang();
@@ -7667,7 +7780,11 @@ const EVENTS = [
 ];
 let evCat='all', evSort='date', pastSort='date';
 function catCls(c){return{cultural:'bc',youth:'by',support:'bs',online:'bo',community:'bcm'}[c]||'bcm';}
-function evCard(e,isPast){const idx=EVENTS.indexOf(e);return`<div class="ev-card"><div class="ev-date-box"><div class="ev-month">${e.month}</div><div class="ev-day">${e.day}</div><div class="ev-year">${e.year}</div></div><div style="flex:1;"><div class="ev-badges"><span class="ev-badge ${catCls(e.cat)}">${e.cat}</span>${isPast?'<span class="ev-badge past">Past</span>':''}</div><div class="ev-title">${e.title}</div><div class="ev-meta"><span>${e.time}</span><span>${e.loc}</span><span>${e.price}</span></div><div class="ev-desc">${e.desc}</div>${isPast?`<div class="ev-actions"><button class="btn-sm btn-ghost-sm" onclick="openEventGallery(${JSON.stringify(e.title)},${JSON.stringify(e.time+' · '+e.loc)})" style="display:flex;align-items:center;gap:6px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>View Photos</button></div>`:`<div class="ev-actions"><button class="btn-sm btn-primary-sm" onclick="openRSVP(${idx})">RSVP / Register</button><button class="btn-sm btn-ghost-sm" onclick="nav('membership')">Become a Member</button></div>`}</div></div>`;}
+function evCard(e,isPast){
+  const idx=EVENTS.indexOf(e);
+  const cover=e.folder?`<div class="ev-cover" style="background-image:url('/images/events/${e.folder}/cover.jpg')"></div>`:'';
+  return`<div class="ev-card">${cover}<div class="ev-card-body"><div class="ev-date-box"><div class="ev-month">${e.month}</div><div class="ev-day">${e.day}</div><div class="ev-year">${e.year}</div></div><div style="flex:1;"><div class="ev-badges"><span class="ev-badge ${catCls(e.cat)}">${e.cat}</span>${isPast?'<span class="ev-badge past">Past</span>':''}</div><div class="ev-title">${e.title}</div><div class="ev-meta"><span>${e.time}</span><span>${e.loc}</span><span>${e.price}</span></div><div class="ev-desc">${e.desc}</div>${isPast?`<div class="ev-actions"><button class="btn-sm btn-ghost-sm" onclick="openEventGallery(${JSON.stringify(e.title)},${JSON.stringify(e.time+' · '+e.loc)})" style="display:flex;align-items:center;gap:6px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>View Photos</button></div>`:`<div class="ev-actions"><button class="btn-sm btn-primary-sm" onclick="openRSVP(${idx})">RSVP / Register</button><button class="btn-sm btn-ghost-sm" onclick="nav('membership')">Become a Member</button></div>`}</div></div></div>`;
+}
 function filterEv(cat,btn){evCat=cat;document.querySelectorAll('#events-upcoming .ev-tab').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');renderEvents();}
 function sortEv(s,btn){evSort=s;document.querySelectorAll('#events-upcoming .sort-btn').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');renderEvents();}
 function sortPastEv(s,btn){pastSort=s;document.querySelectorAll('#events-past .sort-btn').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');renderPastEvents();}
@@ -7752,12 +7869,23 @@ function openEventGallery(title, meta){
 
   document.getElementById('bentoGalTitle').textContent=title;
   document.getElementById('bentoGalMeta').textContent=meta;
-  const photos=(EVENT_GALLERY[title]||GALLERY_FALLBACK);
+  const evObj=EVENTS.find(e=>e.title===title);
+  let photos;
+  if(evObj&&evObj.folder&&evObj.photoCount>0){
+    photos=Array.from({length:evObj.photoCount},(_,i)=>({
+      src:`/images/events/${evObj.folder}/${String(i+1).padStart(2,'0')}.jpg`,
+      label:`Photo ${i+1}`,
+      bg:'#1a1a1a'
+    }));
+  } else {
+    photos=(EVENT_GALLERY[title]||GALLERY_FALLBACK);
+  }
 
   grid.innerHTML=photos.map((p,i)=>{
     const h=BENTO_H[i%BENTO_H.length];
     const w=i%3===0?'320px':'260px';
-    return`<div class="bento-card" data-i="${i}" onclick="openBentoFull(${i})" title="${p.label}" style="width:${w};height:${h};border-radius:18px;flex-shrink:0;position:relative;cursor:pointer;overflow:hidden;background:${p.bg};opacity:0;transform:translateY(20px) scale(0.97);transition:opacity 0.45s ease,transform 0.45s ease,box-shadow 0.3s;align-self:${i%2===0?'flex-start':'flex-end'};" onmouseover="this.style.boxShadow='0 24px 64px rgba(0,0,0,0.6)';this.style.transform='scale(1.03)';this.querySelector('.bento-overlay').style.opacity='1'" onmouseout="this.style.boxShadow='none';this.style.transform='scale(1)';this.querySelector('.bento-overlay').style.opacity='0'">
+    const imgHtml=p.src?`<img src="${p.src}" alt="${p.label}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">` :'';
+    return`<div class="bento-card" data-i="${i}" onclick="openBentoFull(${i})" title="${p.label}" style="width:${w};height:${h};border-radius:18px;flex-shrink:0;position:relative;cursor:pointer;overflow:hidden;background:${p.bg||'#1a1a1a'};opacity:0;transform:translateY(20px) scale(0.97);transition:opacity 0.45s ease,transform 0.45s ease,box-shadow 0.3s;align-self:${i%2===0?'flex-start':'flex-end'};" onmouseover="this.style.boxShadow='0 24px 64px rgba(0,0,0,0.6)';this.style.transform='scale(1.03)';this.querySelector('.bento-overlay').style.opacity='1'" onmouseout="this.style.boxShadow='none';this.style.transform='scale(1)';this.querySelector('.bento-overlay').style.opacity='0'">${imgHtml}
       <div class="bento-overlay" style="opacity:0;position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.75) 0%,transparent 60%);transition:opacity 0.3s;border-radius:18px;display:flex;align-items:flex-end;padding:20px;">
         <div style="color:white;">
           <div style="font-size:13px;font-weight:600;">${p.label}</div>
@@ -7798,10 +7926,15 @@ function openBentoFull(i){
   const full=document.getElementById('bentoFull');
   const img=document.getElementById('bentoFullImg');
   const cap=document.getElementById('bentoFullCaption');
-  img.style.background=p.bg;
   img.style.width='min(92vw,820px)';
   img.style.height='min(72vh,520px)';
-  img.innerHTML=`<div style="display:flex;flex-direction:column;align-items:center;gap:12px;opacity:0.35;"><svg width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="0.8"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><div style="color:white;font-size:12px;">Photo placeholder</div></div>`;
+  if(p.src){
+    img.style.background='#000';
+    img.innerHTML=`<img src="${p.src}" alt="${p.label}" style="width:100%;height:100%;object-fit:contain;border-radius:12px;">`;
+  } else {
+    img.style.background=p.bg;
+    img.innerHTML=`<div style="display:flex;flex-direction:column;align-items:center;gap:12px;opacity:0.35;"><svg width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="0.8"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><div style="color:white;font-size:12px;">Photo placeholder</div></div>`;
+  }
   cap.innerHTML='<span style="color:white;font-weight:600;">'+(window._bentoTitle||'')+' — '+p.label+'</span>';
   full.style.display='flex';
 }
@@ -8048,6 +8181,65 @@ function _contactMailto(p, btn){
   window.location.href = 'mailto:glimmerofhopesa@gmail.com?subject=' + subject + '&body=' + body;
   _contactDone(btn);
 }
+async function submitBizRegister(btn) {
+  const v = id => (document.getElementById(id)?.value || '').trim();
+  const name    = v('bizRegName');
+  const cat     = v('bizRegCat');
+  const contact = v('bizRegContact');
+  const email   = v('bizRegEmail');
+  const desc    = v('bizRegDesc');
+  if (!name)    { alert('Please enter your business name.'); return; }
+  if (!contact) { alert('Please enter your name.'); return; }
+  if (!email)   { alert('Please enter your email address.'); return; }
+  if (!desc)    { alert('Please add a brief description.'); return; }
+
+  btn.disabled = true;
+  btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Sending…';
+
+  const payload = {
+    access_key: WEB3FORMS_ACCESS_KEY,
+    subject: 'Business Directory Listing Request — ' + name,
+    from_name: contact,
+    name: contact,
+    email: email,
+    message: [
+      'Business Name: '  + name,
+      'Category: '       + (cat     || '—'),
+      'Contact Person: ' + contact,
+      'Phone: '          + (v('bizRegPhone')   || '—'),
+      'Suburb: '         + (v('bizRegSuburb')  || '—'),
+      'Website: '        + (v('bizRegWebsite') || '—'),
+      '',
+      'Description (EN):',
+      desc,
+      '',
+      'Description (AR):',
+      v('bizRegDescAr') || '—',
+    ].join('\n')
+  };
+
+  let sent = false;
+  if (WEB3FORMS_ACCESS_KEY) {
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      sent = (await res.json()).success;
+    } catch (_) { sent = false; }
+  }
+
+  if (!sent) {
+    const body = encodeURIComponent(payload.message);
+    const subj = encodeURIComponent(payload.subject);
+    window.location.href = `mailto:glimmerofhopesa@gmail.com?subject=${subj}&body=${body}`;
+  }
+
+  document.getElementById('bizRegForm').style.display    = 'none';
+  document.getElementById('bizRegSuccess').style.display = 'flex';
+}
+
 async function submitContact(btn){
   const p = _contactPayload();
   if (!p.email)   { alert('Please enter your email address.'); return; }
@@ -8302,7 +8494,7 @@ async function saveMemberToDatabase(memberData){
 /* ── Main payment handler ── */
 async function submitMembership(btn){
   const payMethodEl=document.querySelector('input[name="payMethod"]:checked');
-  const payMethod=payMethodEl?payMethodEl.value:'card';
+  const payMethod=payMethodEl?payMethodEl.value:'bank';
 
   // Collect member data (always needed)
   const f=id=>{const e=document.getElementById(id);return e?e.value.trim():''};
@@ -8642,7 +8834,7 @@ async function submitDonate(btn) {
 
   /* ── 3. Read payment method ── */
   const payMethodEl = document.querySelector('input[name="donPayMethod"]:checked');
-  const payMethod   = payMethodEl ? payMethodEl.value : 'card';
+  const payMethod   = payMethodEl ? payMethodEl.value : 'bank';
 
   /* ── 4. Collect donor data ── */
   const donRef  = generateDonRef();
@@ -8852,7 +9044,11 @@ function renderGalleryAlbums() {
   /* No .reveal on album cards — they're dynamically injected after IntersectionObserver fires */
   grid.innerHTML = pastEvents.map(e => {
     const photos = EVENT_GALLERY[e.title] || GALLERY_FALLBACK;
-    const bg = (photos[0] && photos[0].bg) || catGrad[e.cat] || catGrad.community;
+    const fallbackBg = (photos[0] && photos[0].bg) || catGrad[e.cat] || catGrad.community;
+    const bg = e.folder
+      ? `url('/images/events/${e.folder}/cover.jpg') center/cover no-repeat, ${fallbackBg}`
+      : fallbackBg;
+    const photoCount = e.folder && e.photoCount > 0 ? e.photoCount : photos.length;
     const badge = `<span class="album-cat-badge" style="background:${catColors[e.cat]||'#005C34'}22;color:${catColors[e.cat]||'#005C34'}">${catLabel[e.cat]||e.cat}</span>`;
     return `
     <div class="album-card reveal" onclick="openEventGallery(${JSON.stringify(e.title)},${JSON.stringify(e.time+' · '+e.loc)})" role="button" tabindex="0" aria-label="View photos from ${e.title}" onkeydown="if(event.key==='Enter'||event.key===' ')openEventGallery(${JSON.stringify(e.title)},${JSON.stringify(e.time+' · '+e.loc)})">
@@ -8861,7 +9057,7 @@ function renderGalleryAlbums() {
         <div class="album-thumb-overlay"></div>
         <div class="album-thumb-count">
           <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-          ${photos.length} photos
+          ${photoCount} photos
         </div>
         <div class="album-thumb-play">
           <div class="album-thumb-play-btn" aria-hidden="true">
@@ -9060,7 +9256,7 @@ function initReveal() {
 import { initializeApp }                                                          from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
 import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged }       from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js';
 import { getFirestore, collection, addDoc, updateDoc, deleteDoc, setDoc,
-         doc, getDoc, onSnapshot, query, orderBy, serverTimestamp }               from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
+         doc, getDoc, getDocs, onSnapshot, query, orderBy, serverTimestamp }      from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
 
 /* ═══════════════════════════════════════════════════════════════════════
    STEP 1 — Paste your Firebase config here (replace all "YOUR_…" values)
@@ -9114,6 +9310,7 @@ window._gohFB = {
   async set(col, id, data)  { return setDoc(doc(_db, col, id), { ...data, _createdAt: serverTimestamp() }); },
   async update(col, id, data) { return updateDoc(doc(_db, col, id), { ...data, _updatedAt: serverTimestamp() }); },
   async remove(col, id)     { return deleteDoc(doc(_db, col, id)); },
+  async getAll(col)         { const s = await getDocs(collection(_db, col)); return s.docs.map(d => d.id); },
   listen(col, cb) {
     const q = query(collection(_db, col), orderBy('_createdAt', 'asc'));
     return onSnapshot(q, snap => cb(snap.docs.map(d => ({ id: d.id, ...d.data() }))));
@@ -9276,6 +9473,17 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
         <div class="admin-form-group"><label>Description</label>
           <textarea id="adminEvDesc" class="admin-input" rows="3" placeholder="Brief description…"></textarea></div>
+        <div class="admin-form-row">
+          <div class="admin-form-group">
+            <label>Image Folder <small style="color:var(--text-muted);font-weight:400;">(e.g. eid-2025)</small></label>
+            <input type="text" id="adminEvFolder" class="admin-input" placeholder="eid-celebration-2025">
+          </div>
+          <div class="admin-form-group">
+            <label>Photo Count</label>
+            <input type="number" id="adminEvPhotoCount" class="admin-input" placeholder="20" min="0" max="999">
+          </div>
+        </div>
+        <p style="font-size:12px;color:var(--text-muted);margin:-8px 0 12px;">Upload to <code>public_html/images/events/[folder]/</code> on Hostinger as <code>01.jpg</code>…<code>20.jpg</code> + <code>cover.jpg</code></p>
         <button class="admin-btn" id="adminEvSaveBtn" onclick="adminSaveEvent()">+ Add Event</button>
       </div>
 
@@ -9763,6 +9971,7 @@ function _adminEdit(type, id) {
     _setV('adminEvEditId', id); _setV('adminEvTitle', ev.title); _setV('adminEvDate', ev.date);
     _setV('adminEvStatus', ev.status||'upcoming'); _setV('adminEvTime', ev.time); _setV('adminEvLoc', ev.loc);
     _setV('adminEvCat', ev.cat||'community'); _setV('adminEvPrice', ev.price); _setV('adminEvDesc', ev.desc);
+    _setV('adminEvFolder', ev.folder||''); _setV('adminEvPhotoCount', ev.photoCount||'');
   } else if (type === 'News') {
     const n = NEWS.find(n => n.id === id); if (!n) return;
     _setV('adminNewsEditId', id); _setV('adminNewsTitle', n.title); _setV('adminNewsDate', n.date);
@@ -9814,7 +10023,7 @@ function _adminEdit(type, id) {
 
 function adminCancelEdit(prefix) {
   const fieldMap = {
-    Ev  : ['adminEvTitle','adminEvDate','adminEvTime','adminEvLoc','adminEvPrice','adminEvDesc'],
+    Ev  : ['adminEvTitle','adminEvDate','adminEvTime','adminEvLoc','adminEvPrice','adminEvDesc','adminEvFolder','adminEvPhotoCount'],
     News: ['adminNewsTitle','adminNewsDate','adminNewsSummary'],
     P   : ['adminPName','adminPAbbr','adminPFullName','adminPDesc','adminPLogo'],
     Act : ['adminActName','adminActNameAr','adminActAge','adminActTime','adminActDesc','adminActDescAr','adminActIcon','adminActIconUrl','adminActImg'],
@@ -9853,9 +10062,11 @@ async function adminSaveEvent() {
     date  : dateVal,
     month : M[d.getMonth()], day: String(d.getDate()), year: String(d.getFullYear()),
     time  : (document.getElementById('adminEvTime')?.value  || '').trim() || `${d.getDate()} ${M[d.getMonth()]} ${d.getFullYear()}`,
-    loc   : (document.getElementById('adminEvLoc')?.value   || '').trim() || 'TBC',
-    price : (document.getElementById('adminEvPrice')?.value || '').trim() || 'Free',
-    desc  : (document.getElementById('adminEvDesc')?.value  || '').trim()
+    loc       : (document.getElementById('adminEvLoc')?.value        || '').trim() || 'TBC',
+    price     : (document.getElementById('adminEvPrice')?.value      || '').trim() || 'Free',
+    desc      : (document.getElementById('adminEvDesc')?.value       || '').trim(),
+    folder    : (document.getElementById('adminEvFolder')?.value     || '').trim().replace(/\s+/g,'-').toLowerCase(),
+    photoCount: parseInt(document.getElementById('adminEvPhotoCount')?.value || '0', 10) || 0
   };
   const editId = document.getElementById('adminEvEditId')?.value;
   const fb = window._gohFB;
@@ -10117,15 +10328,16 @@ async function adminReplaceAllFromFile() {
   if (!fb?.isConfigured) { showAdminToast('⚠ Configure Firebase first.', true); return; }
   if (!confirm('Replace ALL live content with the content built into this HTML file?\n\nThis permanently DELETES every event, news item, committee member, partner, activity, program, business and FAQ currently in the database, then loads the content from the file.\n\nThis CANNOT be undone. Continue?')) return;
   if (!confirm('Final check: delete all current data and replace it with the file content?')) return;
-  showAdminToast('Replacing all content from file…');
+  showAdminToast('Wiping Firestore and reloading from file…');
   let del = 0, add = 0;
   try {
     for (const col of Object.keys(_FILE_DEFAULTS)) {
       const cfg = _SEED_CFG[col];
-      // 1) delete every record currently in this collection
-      const ids = [...new Set(cfg.arr().map(x => x && x.id).filter(Boolean))];
-      for (const id of ids) { await fb.remove(col, id); del++; }
-      // 2) load the file's content (deterministic ids → clean, no duplicates)
+      // 1) fetch ALL doc IDs directly from Firestore (not from the live array which
+      //    may have been overwritten or may differ from what's actually stored)
+      const firestoreIds = await fb.getAll(col);
+      for (const id of firestoreIds) { await fb.remove(col, id); del++; }
+      // 2) write the content hard-coded in this HTML file
       for (const it of _FILE_DEFAULTS[col]) {
         const id = cfg.id(it);
         const { id:_i, _createdAt, _updatedAt, ...data } = it;
@@ -10133,7 +10345,7 @@ async function adminReplaceAllFromFile() {
         add++;
       }
     }
-    showAdminToast(`Done — removed ${del} old record(s), loaded ${add} from the file.`);
+    showAdminToast(`Done — deleted ${del} old record(s), wrote ${add} from this file.`);
   } catch(e) { showAdminToast('⚠ Replace failed: '+e.message, true); }
 }
 
