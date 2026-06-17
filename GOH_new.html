@@ -10329,6 +10329,8 @@ async function adminReplaceAllFromFile() {
   if (!confirm('Replace ALL live content with the content built into this HTML file?\n\nThis permanently DELETES every event, news item, committee member, partner, activity, program, business and FAQ currently in the database, then loads the content from the file.\n\nThis CANNOT be undone. Continue?')) return;
   if (!confirm('Final check: delete all current data and replace it with the file content?')) return;
   showAdminToast('Wiping Firestore and reloading from file…');
+  // Block _autoSeed from firing when listener sees empty collections during deletion
+  Object.keys(_SEED_CFG).forEach(col => { _autoSeeded[col] = true; });
   let del = 0, add = 0;
   try {
     for (const col of Object.keys(_FILE_DEFAULTS)) {
