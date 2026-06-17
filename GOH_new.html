@@ -11,6 +11,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Amiri:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  <!-- SVG country flags (same source as react-phone-number-input) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flag-icons@7.2.3/css/flag-icons.min.css">
 
 <style>
 /* ═══════════════════════════════════════════════════════════
@@ -1154,10 +1156,6 @@ select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmln
           <svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
         </button>
         <div class="nav-dropdown-menu" role="menu">
-          <a role="menuitem" onclick="nav('what');showSubtab('what','arrive')" data-en="Before You Arrive" data-ar="قبل وصولك">
-            <span class="dd-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.8 19.8 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.8 19.8 0 01.04 2.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92v2z"/></svg></span>
-            Before You Arrive
-          </a>
           <a role="menuitem" onclick="nav('what');showSubtab('what','essentials')" data-en="Newcomer Essentials" data-ar="أساسيات القادم الجديد">
             <span class="dd-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span>
             Newcomer Essentials
@@ -1247,7 +1245,7 @@ select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmln
   <a class="nav-m-sub" onclick="nav('who');showSubtab('who','committee');closeMobileNav()" data-en="Executive Committee" data-ar="اللجنة التنفيذية">Executive Committee</a>
   <a class="nav-m-sub" onclick="nav('who');showSubtab('who','heritage');closeMobileNav()" data-en="Palestine Heritage" data-ar="التراث الفلسطيني">Palestine Heritage</a>
   <div class="nav-mobile-section" data-en="What We Do" data-ar="ماذا نفعل">What We Do</div>
-  <a class="nav-m-sub" onclick="nav('what');showSubtab('what','arrive');closeMobileNav()" data-en="Before You Arrive" data-ar="قبل وصولك">Before You Arrive</a>
+  <a class="nav-m-sub" onclick="nav('what');showSubtab('what','essentials');closeMobileNav()" data-en="Newcomer Essentials" data-ar="أساسيات القادم الجديد">Newcomer Essentials</a>
   <a class="nav-m-sub" onclick="nav('what');showSubtab('what','kids');closeMobileNav()" data-en="Kids Activities" data-ar="أنشطة الأطفال">Kids Activities</a>
   <a class="nav-m-sub" onclick="nav('what');showSubtab('what','biz');closeMobileNav()" data-en="Local Businesses" data-ar="الأعمال المحلية">Local Businesses</a>
   <div class="nav-mobile-section" data-en="Events" data-ar="الفعاليات">Events</div>
@@ -1817,25 +1815,55 @@ select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmln
 .partner-badge.faith  { background: rgba(200,16,46,0.1);   color: var(--red); }
 
 .partner-become-cta {
-  margin-top: var(--sp-4);
-  padding: var(--sp-8) var(--sp-6);
-  background: linear-gradient(135deg, rgba(0,92,52,0.05) 0%, rgba(201,168,76,0.06) 100%);
-  border: 1.5px dashed rgba(0,92,52,0.22);
+  position: relative;
+  overflow: hidden;
+  margin-top: var(--sp-6);
+  padding: var(--sp-10) var(--sp-8);
+  background: linear-gradient(135deg, #00472a 0%, var(--green) 55%, #00583a 100%);
+  border: 1px solid rgba(201,168,76,0.45);
   border-radius: var(--r-lg);
+  box-shadow: 0 22px 54px rgba(0,92,52,0.22);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
 }
+.partner-become-cta::before {
+  content: '';
+  position: absolute;
+  top: -70px;
+  inset-inline-end: -70px;
+  width: 260px; height: 260px;
+  background: repeating-linear-gradient(45deg, rgba(255,255,255,0.06) 0 2px, transparent 2px 14px);
+  border-radius: 50%;
+  pointer-events: none;
+}
 .partner-become-cta h4 {
+  position: relative;
+  z-index: 1;
   font-family: 'Playfair Display', serif;
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: var(--text-dark);
-  margin: 0 0 var(--sp-2);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #fff;
+  margin: 0 0 var(--sp-3);
 }
 .partner-become-cta p {
-  font-size: 0.84rem;
-  color: var(--text-mid);
-  margin: 0 0 var(--sp-5);
+  position: relative;
+  z-index: 1;
+  font-size: 0.92rem;
+  color: rgba(250,250,248,0.85);
+  line-height: 1.7;
+  margin: 0 auto var(--sp-6);
+  max-width: 52ch;
 }
+.partner-become-cta .btn-primary {
+  position: relative;
+  z-index: 1;
+  background: var(--gold-light);
+  color: var(--black);
+  border-color: var(--gold-light);
+}
+.partner-become-cta .btn-primary:hover { background: #fff; border-color: #fff; color: var(--black); }
 
 /* FAQ accordion */
 .faq-list { display: flex; flex-direction: column; gap: var(--sp-3); }
@@ -2018,6 +2046,29 @@ select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmln
   color: var(--black);
 }
 .mission-block p { color: var(--text-mid); font-size: 1rem; line-height: 1.85; }
+.values-list { list-style: none; margin: var(--sp-2) 0 0; padding: 0; }
+.values-list li { color: var(--text-mid); font-size: 0.98rem; line-height: 1.75; padding: var(--sp-3) 0; }
+.values-list li + li { border-top: 1px solid var(--border); }
+.values-list strong { color: var(--green); font-weight: 700; }
+.obj-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-8) var(--sp-12);
+}
+.obj-item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--sp-5);
+  align-items: start;
+}
+.obj-item .n {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 1.8rem;
+  line-height: 1;
+  color: var(--gold);
+}
+.obj-item p { color: var(--text-mid); font-size: 1.02rem; line-height: 1.8; margin: 0; }
 
 /* premium gallery frame for the tatreez poster */
 .tatreez-panel {
@@ -2282,6 +2333,21 @@ select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmln
   gap: var(--sp-5);
   margin-top: var(--sp-4);
 }
+.arrive-note {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-6);
+  flex-wrap: wrap;
+  margin-top: var(--sp-5);
+  padding: var(--sp-5) var(--sp-6);
+  background: var(--green-pale, rgba(0,92,52,0.06));
+  border-inline-start: 4px solid var(--green);
+  border-radius: var(--r-md);
+}
+.arrive-note-text h3 { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 600; color: var(--black); margin-bottom: 4px; }
+.arrive-note-text p { font-size: 0.92rem; color: var(--text-mid); line-height: 1.6; max-width: 60ch; margin: 0; }
+.arrive-note .btn { flex-shrink: 0; }
 @media (max-width: 900px) { .essentials-grid { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 540px) { .essentials-grid { grid-template-columns: 1fr; } }
 .essential-card {
@@ -2376,31 +2442,52 @@ select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmln
 
 /* Business register CTA */
 .biz-register-cta {
-  margin-top: var(--sp-6);
-  background: linear-gradient(135deg, rgba(0,92,52,0.04) 0%, rgba(201,168,76,0.06) 100%);
-  border: 1.5px dashed rgba(0,92,52,0.25);
+  position: relative;
+  overflow: hidden;
+  margin-top: var(--sp-8);
+  background: linear-gradient(135deg, #00472a 0%, var(--green) 55%, #00583a 100%);
+  border: 1px solid rgba(201,168,76,0.45);
   border-radius: var(--r-lg);
-  padding: var(--sp-7) var(--sp-8);
+  padding: var(--sp-9) var(--sp-10);
+  box-shadow: 0 22px 54px rgba(0,92,52,0.22);
+}
+.biz-register-cta::before {
+  content: '';
+  position: absolute;
+  top: -70px;
+  inset-inline-end: -70px;
+  width: 260px; height: 260px;
+  background: repeating-linear-gradient(45deg, rgba(255,255,255,0.06) 0 2px, transparent 2px 14px);
+  border-radius: 50%;
+  pointer-events: none;
 }
 .biz-register-inner {
+  position: relative;
+  z-index: 1;
   display: flex;
   align-items: center;
   gap: var(--sp-6);
 }
 .biz-register-icon {
   width: 60px; height: 60px;
-  background: rgba(0,92,52,0.1);
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.28);
   border-radius: var(--r-lg);
   display: flex; align-items: center; justify-content: center;
-  color: var(--green);
+  color: var(--gold-light);
   flex-shrink: 0;
 }
 .biz-register-text { flex: 1; }
-.biz-register-text h3 { font-size: 1.05rem; margin-bottom: var(--sp-2); }
-.biz-register-text p { font-size: 0.88rem; color: var(--text-mid); line-height: 1.6; max-width: 55ch; }
-.biz-register-actions { display: flex; flex-direction: column; gap: var(--sp-2); align-items: flex-start; flex-shrink: 0; }
+.biz-register-text h3 { font-family: 'Playfair Display', serif; font-size: 1.45rem; font-weight: 600; color: #fff; margin-bottom: var(--sp-2); }
+.biz-register-text p { font-size: 0.92rem; color: rgba(250,250,248,0.85); line-height: 1.7; max-width: 55ch; }
+.biz-register-actions { display: flex; flex-direction: column; gap: var(--sp-3); align-items: flex-start; flex-shrink: 0; }
+.biz-register-actions .btn-primary { background: var(--gold-light); color: var(--black); border-color: var(--gold-light); }
+.biz-register-actions .btn-primary:hover { background: #fff; border-color: #fff; color: var(--black); }
+.biz-register-actions .btn-ghost { color: rgba(255,255,255,0.82) !important; }
+.biz-register-actions .btn-ghost:hover { color: #fff !important; }
 @media (max-width: 768px) {
-  .biz-register-inner { flex-direction: column; align-items: flex-start; gap: var(--sp-4); }
+  .biz-register-cta { padding: var(--sp-7) var(--sp-6); }
+  .biz-register-inner { flex-direction: column; align-items: flex-start; gap: var(--sp-5); }
   .biz-register-actions { flex-direction: row; align-items: center; }
 }
 
@@ -2418,9 +2505,25 @@ select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmln
   transition: box-shadow var(--t-fast);
 }
 .editable-card:hover { box-shadow: var(--shadow); }
+.kids-photo {
+  margin: calc(-1 * var(--sp-5)) calc(-1 * var(--sp-5)) var(--sp-4);
+  border-radius: calc(var(--r-lg) - 1px) calc(var(--r-lg) - 1px) 0 0;
+  overflow: hidden;
+  aspect-ratio: 16 / 10;
+  background: var(--cream);
+}
+.kids-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .kids-card-header, .biz-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: var(--sp-3); }
 .biz-name { font-weight: 600; font-size: 1rem; margin-bottom: 4px; }
 .kids-detail, .biz-desc { font-size: 13px; color: var(--text-mid); line-height: 1.6; }
+.biz-contact-person { font-size: 12.5px; color: var(--text-dark, var(--black)); font-weight: 600; line-height: 1.5; margin-top: var(--sp-3); }
+.biz-links { display: flex; flex-direction: column; gap: 4px; margin-top: var(--sp-3); padding-top: var(--sp-3); border-top: 1px solid var(--border); }
+.biz-link { font-size: 12.5px; color: var(--green); text-decoration: none; word-break: break-word; }
+.biz-link:hover { text-decoration: underline; }
+.kids-card-foot { display: flex; flex-direction: column; gap: 4px; margin-top: var(--sp-3); padding-top: var(--sp-3); border-top: 1px solid var(--border); }
+.kids-link { font-size: 12.5px; color: var(--green); text-decoration: none; word-break: break-word; }
+.kids-link:hover { text-decoration: underline; }
+.kids-link-cta { font-weight: 600; cursor: pointer; }
 .biz-logo-ph { width: 40px; height: 40px; border-radius: var(--r); background: var(--cream); display: flex; align-items: center; justify-content: center; font-size: 20px; margin-right: var(--sp-3); flex-shrink: 0; }
 .biz-header { align-items: center; }
 .kids-badge {
@@ -2866,6 +2969,14 @@ select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmln
 }
 .program-card:hover { box-shadow: var(--shadow); border-color: var(--green); }
 .program-icon { color: var(--green); }
+.program-photo {
+  margin: calc(-1 * var(--sp-6)) calc(-1 * var(--sp-6)) 0;
+  border-radius: calc(var(--r-lg) - 1px) calc(var(--r-lg) - 1px) 0 0;
+  overflow: hidden;
+  aspect-ratio: 16 / 10;
+  background: var(--cream);
+}
+.program-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .program-badge {
   display: inline-block;
   padding: 3px 10px;
@@ -3189,6 +3300,7 @@ select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmln
   .poster-frame { max-width: 380px; }
   .mission-section::before { display: none; }
   .story-grid { grid-template-columns: 1fr; gap: var(--sp-10); }
+  .obj-grid { grid-template-columns: 1fr; gap: var(--sp-6); }
   .focus-grid { grid-template-columns: repeat(2, 1fr); }
   .lead-cta { flex-direction: column; align-items: flex-start; padding: var(--sp-8); }
   .contact-layout { grid-template-columns: 1fr; }
@@ -3348,6 +3460,151 @@ select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmln
   letter-spacing: 0.07em;
   text-transform: uppercase;
 }
+.ct-hint {
+  display: block;
+  margin-top: 6px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+.ct-phone-row { display: flex; gap: var(--sp-3); align-items: stretch; flex-wrap: wrap; }
+.ct-code-wrap { flex: 0 0 auto; width: 130px; }
+.ct-phone-input { flex: 1 1 180px; }
+@media (max-width: 480px) { .ct-code-wrap { width: 100%; } }
+
+/* ── Premium Country Code Dropdown ─────────────────────────── */
+.cc-dropdown { position: relative; user-select: none; }
+
+/* Trigger button — matches other form inputs */
+.cc-trigger {
+  display: flex; align-items: center; gap: 9px;
+  width: 100%; min-height: 48px; padding: 0 12px 0 12px;
+  background: var(--white);
+  border: 1.5px solid var(--border-mid);
+  border-radius: var(--r-md);
+  cursor: pointer; font-family: inherit;
+  color: var(--black);
+  transition: border-color 200ms ease, box-shadow 200ms ease;
+}
+.cc-trigger:hover { border-color: var(--gold); }
+.cc-trigger[aria-expanded="true"] {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(201,168,76,0.16);
+}
+
+/* Flag shown in a soft pill */
+.cc-trigger-flag-wrap {
+  display: flex; align-items: center; justify-content: center;
+  width: 32px; height: 24px;
+  background: #f0f0ef;
+  border-radius: 5px;
+  flex-shrink: 0; overflow: hidden;
+}
+/* flag-icons sizing inside trigger */
+.cc-trigger-flag-wrap .fi {
+  width: 22px; height: 16px;
+  border-radius: 2px;
+  background-size: cover;
+  display: block;
+  flex-shrink: 0;
+}
+.cc-trigger-code {
+  font-size: 14px; font-weight: 600;
+  color: var(--black); letter-spacing: 0.01em;
+  flex: 1; text-align: left;
+}
+.cc-trigger-chevron {
+  width: 14px; height: 14px; color: var(--text-muted);
+  flex-shrink: 0; transition: transform 200ms ease;
+}
+.cc-trigger[aria-expanded="true"] .cc-trigger-chevron { transform: rotate(180deg); }
+
+/* Panel — clean white, wider than trigger */
+.cc-panel {
+  position: absolute; top: calc(100% + 6px); left: 0;
+  min-width: 280px; z-index: 220;
+  background: #fff;
+  border: 1.5px solid rgba(11,12,14,0.12);
+  border-top: 3px solid var(--gold);
+  border-radius: 0 0 12px 12px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.14), 0 2px 8px rgba(0,0,0,0.06);
+  overflow: hidden; display: none;
+  animation: ccDrop 180ms cubic-bezier(0.16,1,0.3,1);
+}
+.cc-panel.cc-open { display: block; }
+@keyframes ccDrop {
+  from { opacity:0; transform: translateY(-5px); }
+  to   { opacity:1; transform: translateY(0); }
+}
+
+/* Search bar */
+.cc-search-wrap {
+  position: relative; padding: 10px 10px 8px;
+  border-bottom: 1px solid rgba(11,12,14,0.08);
+  background: #fafaf8;
+}
+.cc-search-icon {
+  position: absolute; left: 21px; top: 50%; transform: translateY(-50%);
+  width: 13px; height: 13px; color: #aaa; pointer-events: none;
+}
+.cc-search-input {
+  width: 100%; padding: 8px 10px 8px 30px;
+  background: #fff;
+  border: 1.5px solid rgba(11,12,14,0.14);
+  border-radius: 7px; color: var(--black); font-family: inherit; font-size: 13px;
+  outline: none; transition: border-color 150ms;
+}
+.cc-search-input::placeholder { color: #bbb; }
+.cc-search-input:focus { border-color: var(--gold); }
+
+/* Country list */
+.cc-list {
+  list-style: none; margin: 0; padding: 5px 0;
+  max-height: 216px; overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(11,12,14,0.18) transparent;
+}
+.cc-list::-webkit-scrollbar { width: 4px; }
+.cc-list::-webkit-scrollbar-track { background: transparent; }
+.cc-list::-webkit-scrollbar-thumb { background: rgba(11,12,14,0.15); border-radius: 2px; }
+
+.cc-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 12px; cursor: pointer;
+  transition: background 120ms;
+  color: var(--black); font-size: 13.5px;
+}
+.cc-item:hover { background: #f5f5f3; }
+.cc-item.cc-item-active { background: rgba(201,168,76,0.10); }
+
+.cc-item-flag {
+  display: flex; align-items: center; justify-content: center;
+  width: 28px; height: 21px;
+  background: #f0f0ef; border-radius: 4px;
+  flex-shrink: 0; overflow: hidden;
+}
+/* flag-icons sizing inside list items */
+.cc-item-flag .fi {
+  width: 22px; height: 15px;
+  border-radius: 2px;
+  background-size: cover;
+  display: block;
+}
+/* globe icon fallback for "Other" */
+.cc-item-flag .cc-globe, .cc-trigger-flag-wrap .cc-globe {
+  width: 16px; height: 16px; color: #888;
+}
+.cc-item-name { flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 13px; }
+.cc-item-code {
+  font-size: 12px; color: #888; font-variant-numeric: tabular-nums;
+  flex-shrink: 0;
+}
+.cc-item.cc-item-active .cc-item-name { font-weight: 600; color: var(--green); }
+.cc-item.cc-item-active .cc-item-code { color: var(--gold); }
+
+.cc-tick { display: block; width: 14px; height: 14px; flex-shrink: 0; }
+svg.cc-tick { width: 14px; height: 14px; flex-shrink: 0; }
+.cc-empty { text-align: center; padding: 18px; color: #aaa; font-size: 13px; }
 
 /* Icon + input wrapper */
 .ct-input-wrap {
@@ -4463,7 +4720,7 @@ select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmln
               </div>
               <div>
                 <h3 data-en="Our Mission" data-ar="مهمتنا">Our Mission</h3>
-                <p data-en="To preserve and celebrate Palestinian culture and identity in South Australia, provide practical support to community members, and foster an inclusive, active community for all Palestinians and their friends." data-ar="الحفاظ على الثقافة والهوية الفلسطينية والاحتفاء بها في جنوب أستراليا، وتقديم الدعم العملي لأعضاء المجتمع، وتعزيز مجتمع شامل ونشط لجميع الفلسطينيين وأصدقائهم.">To preserve and celebrate Palestinian culture and identity in South Australia, provide practical support to community members, and foster an inclusive, active community for all Palestinians and their friends.</p>
+                <p data-en="To bring Palestinians together and celebrate our culture, heritage and history with one another as well as the broader Australian community and maintain a positive identity among the greater public." data-ar="أن نجمع الفلسطينيين معًا ونحتفي بثقافتنا وتراثنا وتاريخنا فيما بيننا ومع المجتمع الأسترالي الأوسع، وأن نحافظ على هوية إيجابية أمام عامة الناس.">To bring Palestinians together and celebrate our culture, heritage and history with one another as well as the broader Australian community and maintain a positive identity among the greater public.</p>
               </div>
             </div>
             <div class="mission-block">
@@ -4473,7 +4730,7 @@ select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmln
               </div>
               <div>
                 <h3 data-en="Our Vision" data-ar="رؤيتنا">Our Vision</h3>
-                <p data-en="A thriving, connected Palestinian community in South Australia where every family feels welcomed, supported and proud of their heritage." data-ar="مجتمع فلسطيني مزدهر ومترابط في جنوب أستراليا حيث تشعر كل عائلة بالترحيب والدعم والفخر بتراثها.">A thriving, connected Palestinian community in South Australia where every family feels welcomed, supported and proud of their heritage.</p>
+                <p data-en="Be the go-to organisation for residents, citizens and new comers of Palestinian origins, to connect, meet and support each other and accelerate integrating into society while keeping close ties with our community, heritage and history." data-ar="أن نكون المنظمة المرجعية للمقيمين والمواطنين والقادمين الجدد من أصول فلسطينية، للتواصل واللقاء ودعم بعضهم البعض وتسريع الاندماج في المجتمع مع الحفاظ على روابط وثيقة بمجتمعنا وتراثنا وتاريخنا.">Be the go-to organisation for residents, citizens and new comers of Palestinian origins, to connect, meet and support each other and accelerate integrating into society while keeping close ties with our community, heritage and history.</p>
               </div>
             </div>
             <div class="mission-block">
@@ -4483,7 +4740,13 @@ select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmln
               </div>
               <div>
                 <h3 data-en="Our Values" data-ar="قيمنا">Our Values</h3>
-                <p data-en="Community, dignity, cultural pride, practical support, inclusivity, and transparency in all we do." data-ar="المجتمع والكرامة والفخر الثقافي والدعم العملي والشمولية والشفافية في كل ما نقوم به.">Community, dignity, cultural pride, practical support, inclusivity, and transparency in all we do.</p>
+                <ul class="values-list">
+                  <li data-en="<strong>Respect:</strong> At the core of everything we do is respect. Respect for one another. Respect for our ideas. Respect for our culture." data-ar="<strong>الاحترام:</strong> في صميم كل ما نقوم به الاحترام. احترام بعضنا البعض. احترام أفكارنا. احترام ثقافتنا."><strong>Respect:</strong> At the core of everything we do is respect. Respect for one another. Respect for our ideas. Respect for our culture.</li>
+                  <li data-en="<strong>Integrity:</strong> Our promise is to be open and honest with everything we do. We pride ourselves in behaving righteously and putting our community's best interests first." data-ar="<strong>النزاهة:</strong> وعدنا أن نكون منفتحين وصادقين في كل ما نفعله. نفخر بأن نتصرف بنزاهة ونضع مصلحة مجتمعنا أولًا."><strong>Integrity:</strong> Our promise is to be open and honest with everything we do. We pride ourselves in behaving righteously and putting our community's best interests first.</li>
+                  <li data-en="<strong>Unity:</strong> Building a strong and united community is essential for the success of our organisation. For we are only as successful as we are united." data-ar="<strong>الوحدة:</strong> بناء مجتمع قوي وموحّد أمر أساسي لنجاح منظمتنا. فنحن ننجح بقدر ما نتحد."><strong>Unity:</strong> Building a strong and united community is essential for the success of our organisation. For we are only as successful as we are united.</li>
+                  <li data-en="<strong>Empathy:</strong> We share in each of our successes as we also share one another's pain. For that we care deeply for each and every member in our community to ensure that we help one another in our lows and support one another in our highs." data-ar="<strong>التعاطف:</strong> نتشارك في كل نجاحاتنا كما نتشارك آلام بعضنا البعض. لذلك نهتم بعمق بكل فرد في مجتمعنا لنساعد بعضنا في أوقات الشدة وندعم بعضنا في أوقات الفرح."><strong>Empathy:</strong> We share in each of our successes as we also share one another's pain. For that we care deeply for each and every member in our community to ensure that we help one another in our lows and support one another in our highs.</li>
+                  <li data-en="<strong>Growth:</strong> We want to grow the Palestinian community that highlights our heritage and represents us in a way that makes us proud." data-ar="<strong>النمو:</strong> نريد أن ننمّي المجتمع الفلسطيني بما يبرز تراثنا ويمثّلنا بطريقة تجعلنا فخورين."><strong>Growth:</strong> We want to grow the Palestinian community that highlights our heritage and represents us in a way that makes us proud.</li>
+                </ul>
               </div>
             </div>
           </div>
@@ -4496,6 +4759,36 @@ select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmln
               <span data-en="Palestine — Land, People &amp; History" data-ar="">Palestine — Land, People &amp; History</span>
             </figcaption>
           </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- Our Objectives -->
+    <section class="section reveal" style="background:var(--cream);">
+      <div class="section-inner">
+        <div class="section-label" data-en="What We Set Out To Do" data-ar="ما نسعى لتحقيقه">What We Set Out To Do</div>
+        <h2 class="section-title" style="margin-bottom:var(--sp-10);" data-en="Our Objectives" data-ar="أهدافنا">Our Objectives</h2>
+        <div class="obj-grid">
+          <div class="obj-item">
+            <div class="n" aria-hidden="true">01</div>
+            <p data-en="Promote &amp; disseminate information about Palestinian history, heritage and culture in Australia." data-ar="نشر المعلومات عن التاريخ والتراث والثقافة الفلسطينية في أستراليا والتعريف بها.">Promote &amp; disseminate information about Palestinian history, heritage and culture in Australia.</p>
+          </div>
+          <div class="obj-item">
+            <div class="n" aria-hidden="true">02</div>
+            <p data-en="Provide a forum for Palestinian Australians to practice their culture, celebrate their heritage and to foster closer ties between them." data-ar="توفير منبر للأستراليين من أصل فلسطيني لممارسة ثقافتهم والاحتفاء بتراثهم وتعزيز الروابط فيما بينهم.">Provide a forum for Palestinian Australians to practice their culture, celebrate their heritage and to foster closer ties between them.</p>
+          </div>
+          <div class="obj-item">
+            <div class="n" aria-hidden="true">03</div>
+            <p data-en="Encourage and promote Palestinian community's integration with the Australian society and its diverse ethnic groups." data-ar="تشجيع وتعزيز اندماج المجتمع الفلسطيني في المجتمع الأسترالي ومجموعاته العرقية المتنوعة.">Encourage and promote Palestinian community's integration with the Australian society and its diverse ethnic groups.</p>
+          </div>
+          <div class="obj-item">
+            <div class="n" aria-hidden="true">04</div>
+            <p data-en="Engage and collaborate with similar organisations that support the same objectives." data-ar="التعاون والعمل مع المنظمات المماثلة التي تدعم الأهداف نفسها.">Engage and collaborate with similar organisations that support the same objectives.</p>
+          </div>
+          <div class="obj-item">
+            <div class="n" aria-hidden="true">05</div>
+            <p data-en="Raise funds for charitable causes including the support of new arrivals and refugees." data-ar="جمع التبرعات للأغراض الخيرية بما في ذلك دعم القادمين الجدد واللاجئين.">Raise funds for charitable causes including the support of new arrivals and refugees.</p>
+          </div>
         </div>
       </div>
     </section>
@@ -4648,7 +4941,7 @@ select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmln
             <div class="heritage-icon" aria-hidden="true">
               <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
             </div>
-            <h3 data-en="Dabkeh Dance" data-ar="الدبكة">Dabkeh Dance</h3>
+            <h3 data-en="Dabkeh (Traditional Palestinian Dance)" data-ar="الدبكة (رقصة فلسطينية تقليدية)">Dabkeh (Traditional Palestinian Dance)</h3>
             <p data-en="Dabkeh is the heartbeat of Palestinian folk culture — a powerful collective dance performed at weddings, celebrations, and cultural events across the Levant." data-ar="الدبكة هي نبض الثقافة الشعبية الفلسطينية — رقصة جماعية قوية تُؤدى في الأعراس والاحتفالات والفعاليات الثقافية في بلاد الشام.">Dabkeh is the heartbeat of Palestinian folk culture — a powerful collective dance performed at weddings, celebrations, and cultural events across the Levant.</p>
           </div>
           <div class="heritage-card">
@@ -4811,137 +5104,25 @@ select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmln
   </div>
   <div class="subtab-bar">
     <div class="section-inner" style="display:flex;gap:8px;flex-wrap:wrap;">
-      <button class="subtab active" onclick="showSubtab('what','arrive',this)" data-en="Before You Arrive" data-ar="قبل وصولك">Before You Arrive</button>
-      <button class="subtab" onclick="showSubtab('what','essentials',this)" data-en="Newcomer Essentials" data-ar="أساسيات القادمين">Newcomer Essentials</button>
+      <button class="subtab active" onclick="showSubtab('what','essentials',this)" data-en="Newcomer Essentials" data-ar="أساسيات القادمين">Newcomer Essentials</button>
       <button class="subtab" onclick="showSubtab('what','kids',this)" data-en="Kids Activities" data-ar="أنشطة الأطفال">Kids Activities</button>
       <button class="subtab" onclick="showSubtab('what','biz',this)" data-en="Local Businesses" data-ar="الأعمال المحلية">Local Businesses</button>
     </div>
   </div>
 
-  <!-- Before You Arrive -->
-  <div class="subpanel active" id="what-arrive">
-    <section class="section reveal">
-      <div class="section-inner">
-        <div class="section-label" data-en="Pre-Arrival Support" data-ar="دعم ما قبل الوصول">Pre-Arrival Support</div>
-        <h2 class="section-title" data-en="Before You Arrive" data-ar="قبل وصولك">Before You Arrive</h2>
-        <p style="max-width:65ch;margin-bottom:var(--sp-8);color:var(--text-mid);" data-en="Planning your move to South Australia? Our Welcome Committee can answer your questions and connect you with the right resources before you land." data-ar="هل تخطط للانتقال إلى جنوب أستراليا؟ يمكن للجنة الترحيب لدينا الإجابة على أسئلتك وربطك بالموارد المناسبة قبل وصولك.">Planning your move to South Australia? Our Welcome Committee can answer your questions and connect you with the right resources before you land.</p>
-        <div class="topic-cards-grid">
-          <div class="topic-card">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            <span data-en="Finding housing in SA" data-ar="إيجاد مسكن في جنوب أستراليا">Finding housing in SA</span>
-          </div>
-          <div class="topic-card">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.52 9.8 19.79 19.79 0 011.48 1.18 2 2 0 013.47 1h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L7.91 8.96a16 16 0 006.13 6.13l1.32-1.32a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
-            <span data-en="Connecting with the community" data-ar="التواصل مع المجتمع">Connecting with the community</span>
-          </div>
-          <div class="topic-card">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-            <span data-en="Centrelink &amp; Services Australia" data-ar="سنترلينك وخدمات أستراليا">Centrelink &amp; Services Australia</span>
-          </div>
-          <div class="topic-card">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-            <span data-en="Medicare &amp; healthcare" data-ar="ميديكير والرعاية الصحية">Medicare &amp; healthcare</span>
-          </div>
-          <div class="topic-card">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
-            <span data-en="Schools &amp; AMEP English" data-ar="المدارس وبرنامج AMEP للإنجليزية">Schools &amp; AMEP English</span>
-          </div>
-          <div class="topic-card">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg>
-            <span data-en="Finding employment" data-ar="إيجاد عمل">Finding employment</span>
-          </div>
-        </div>
-        <div style="margin-top:var(--sp-8);">
-          <h3 data-en="Register for Support" data-ar="سجّل للحصول على الدعم">Register for Support</h3>
-          <p style="color:var(--text-mid);font-size:0.9rem;margin-top:var(--sp-2);max-width:60ch;" data-en="Fill in the form below and our Welcome Committee will get in touch within 48 hours." data-ar="أكمل النموذج أدناه وستتواصل معك لجنة الترحيب خلال 48 ساعة.">Fill in the form below and our Welcome Committee will get in touch within 48 hours.</p>
-        </div>
-        <div class="arrival-form-card">
-          <div class="form-grid-2">
-            <div class="form-group">
-              <label data-en="First Name *" data-ar="الاسم الأول *">First Name *</label>
-              <input type="text" id="arrFirst" placeholder="First name" required>
-            </div>
-            <div class="form-group">
-              <label data-en="Last Name *" data-ar="اسم العائلة *">Last Name *</label>
-              <input type="text" id="arrLast" placeholder="Last name" required>
-            </div>
-            <div class="form-group">
-              <label data-en="Email Address *" data-ar="البريد الإلكتروني *">Email Address *</label>
-              <input type="email" id="arrEmail" placeholder="you@example.com" required>
-            </div>
-            <div class="form-group">
-              <label data-en="Phone / WhatsApp" data-ar="الهاتف / واتساب">Phone / WhatsApp</label>
-              <input type="tel" id="arrPhone" placeholder="+61 4xx xxx xxx">
-            </div>
-            <div class="form-group" style="grid-column:1/-1;">
-              <label data-en="My Situation *" data-ar="وضعي الحالي *">My Situation *</label>
-              <select id="arrSituation" required style="width:100%;border:1px solid var(--border);border-radius:var(--r);padding:12px;font-family:inherit;font-size:14px;background:var(--white);color:var(--black);cursor:pointer;">
-                <option value="" data-en="Select your situation…" data-ar="اختر وضعك…">Select your situation…</option>
-                <option data-en="Refugee / Humanitarian visa" data-ar="لاجئ / تأشيرة إنسانية">Refugee / Humanitarian visa</option>
-                <option data-en="Family reunion" data-ar="لمّ شمل عائلي">Family reunion</option>
-                <option data-en="Skilled migrant" data-ar="مهاجر ماهر">Skilled migrant</option>
-                <option data-en="Student visa" data-ar="تأشيرة طالب">Student visa</option>
-                <option data-en="Temporary protection" data-ar="حماية مؤقتة">Temporary protection</option>
-                <option data-en="Australian citizen / returning from abroad" data-ar="مواطن أسترالي / عائد من الخارج">Australian citizen / returning from abroad</option>
-                <option data-en="Other" data-ar="أخرى">Other</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label data-en="Expected / Arrival Date" data-ar="تاريخ الوصول المتوقع">Expected / Arrival Date</label>
-              <input type="date" id="arrDate" style="width:100%;border:1px solid var(--border);border-radius:var(--r);padding:12px;font-family:inherit;font-size:14px;background:var(--white);color:var(--black);">
-            </div>
-            <div class="form-group">
-              <label data-en="Number of family members" data-ar="عدد أفراد العائلة">Number of family members</label>
-              <input type="number" id="arrFamily" min="1" max="30" placeholder="e.g. 4">
-            </div>
-          </div>
-          <div class="form-group" style="margin-top:var(--sp-5);">
-            <label data-en="I need help with" data-ar="أحتاج مساعدة في">I need help with</label>
-            <div class="help-chips" id="helpChips">
-              <button type="button" class="help-chip" onclick="this.classList.toggle('chip-active')" data-en="Centrelink" data-ar="سنترلينك">Centrelink</button>
-              <button type="button" class="help-chip" onclick="this.classList.toggle('chip-active')" data-en="Medicare" data-ar="ميديكير">Medicare</button>
-              <button type="button" class="help-chip" onclick="this.classList.toggle('chip-active')" data-en="School Enrolment" data-ar="تسجيل مدرسي">School Enrolment</button>
-              <button type="button" class="help-chip" onclick="this.classList.toggle('chip-active')" data-en="English Classes" data-ar="دروس إنجليزية">English Classes</button>
-              <button type="button" class="help-chip" onclick="this.classList.toggle('chip-active')" data-en="Housing" data-ar="السكن">Housing</button>
-              <button type="button" class="help-chip" onclick="this.classList.toggle('chip-active')" data-en="Employment" data-ar="التوظيف">Employment</button>
-              <button type="button" class="help-chip" onclick="this.classList.toggle('chip-active')" data-en="Healthcare" data-ar="الرعاية الصحية">Healthcare</button>
-              <button type="button" class="help-chip" onclick="this.classList.toggle('chip-active')" data-en="Transport" data-ar="المواصلات">Transport</button>
-              <button type="button" class="help-chip" onclick="this.classList.toggle('chip-active')" data-en="Legal Advice" data-ar="المشورة القانونية">Legal Advice</button>
-              <button type="button" class="help-chip" onclick="this.classList.toggle('chip-active')" data-en="Community Connection" data-ar="الانتساب المجتمعي">Community Connection</button>
-            </div>
-          </div>
-          <div class="form-group" style="margin-top:var(--sp-4);">
-            <label data-en="Additional Notes" data-ar="ملاحظات إضافية">Additional Notes</label>
-            <textarea id="arrNotes" rows="3" placeholder="Any additional details you'd like to share…" style="width:100%;resize:vertical;border:1px solid var(--border);border-radius:var(--r);padding:12px;font-family:inherit;font-size:14px;background:var(--white);color:var(--black);"></textarea>
-          </div>
-          <div class="form-privacy-note">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
-            <span data-en="Your information is kept confidential and only shared with GOH Welcome Committee volunteers." data-ar="معلوماتك سرية ولا تُشارك إلا مع متطوعي لجنة الترحيب في الجمعية.">Your information is kept confidential and only shared with GOH Welcome Committee volunteers.</span>
-          </div>
-          <button class="btn btn-primary" style="margin-top:var(--sp-5);gap:8px;" onclick="submitArrivalForm(this)">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-            <span data-en="Send Registration" data-ar="أرسل التسجيل">Send Registration</span>
-          </button>
-          <div class="success-banner" id="arrivalSuccess" style="display:none;margin-top:var(--sp-5);">
-            <div class="success-icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
-            </div>
-            <div>
-              <h3 data-en="Registration received!" data-ar="تم استلام تسجيلك!">Registration received!</h3>
-              <p data-en="Our Welcome Committee will be in touch within 48 hours — you can also reach us directly at info@goh.org.au" data-ar="ستتواصل معك لجنة الترحيب خلال 48 ساعة — يمكنك أيضاً التواصل معنا مباشرة على info@goh.org.au">Our Welcome Committee will be in touch within 48 hours — you can also reach us directly at info@goh.org.au</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </div>
-
   <!-- Newcomer Essentials -->
-  <div class="subpanel" id="what-essentials">
+  <div class="subpanel active" id="what-essentials">
     <section class="section reveal">
       <div class="section-inner">
         <div class="section-label" data-en="Settlement Services" data-ar="خدمات الاستيطان">Settlement Services</div>
         <h2 class="section-title" data-en="Newcomer Essentials" data-ar="أساسيات القادمين الجدد">Newcomer Essentials</h2>
+        <div class="arrive-note">
+          <div class="arrive-note-text">
+            <h3 data-en="Before You Arrive" data-ar="قبل وصولك">Before You Arrive</h3>
+            <p data-en="Planning your move to South Australia? Our Welcome Committee can answer your questions." data-ar="هل تخطط للانتقال إلى جنوب أستراليا؟ يمكن للجنة الترحيب لدينا الإجابة على أسئلتك.">Planning your move to South Australia? Our Welcome Committee can answer your questions.</p>
+          </div>
+          <button class="btn btn-secondary btn-sm" onclick="nav('contact')" data-en="Contact us" data-ar="تواصل معنا">Contact us</button>
+        </div>
         <div class="essentials-grid">
 
           <!-- Centrelink -->
@@ -5051,8 +5232,8 @@ select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmln
               <p data-en="Are you a Palestinian business owner in South Australia? Get listed in our community directory for free and connect with thousands of community members." data-ar="هل أنت صاحب عمل فلسطيني في جنوب أستراليا؟ أدرج عملك في دليل مجتمعنا مجاناً وتواصل مع آلاف أفراد المجتمع.">Are you a Palestinian business owner in South Australia? Get listed in our community directory for free and connect with thousands of community members.</p>
             </div>
             <div class="biz-register-actions">
-              <a href="mailto:info@goh.org.au?subject=Business%20Directory%20Listing%20Request" class="btn btn-primary" style="white-space:nowrap;" data-en="Contact Us to Register" data-ar="تواصل معنا للتسجيل">Contact Us to Register</a>
-              <a href="mailto:info@goh.org.au" class="btn btn-ghost" style="font-size:0.82rem;color:var(--text-mid);white-space:nowrap;" aria-label="Email us">info@goh.org.au</a>
+              <a href="mailto:glimmerofhopesa@gmail.com?subject=Business%20Directory%20Listing%20Request" class="btn btn-primary" style="white-space:nowrap;" data-en="Contact Us to Register" data-ar="تواصل معنا للتسجيل">Contact Us to Register</a>
+              <a href="mailto:glimmerofhopesa@gmail.com" class="btn btn-ghost" style="font-size:0.82rem;white-space:nowrap;" aria-label="Email us">glimmerofhopesa@gmail.com</a>
             </div>
           </div>
         </div>
@@ -5177,7 +5358,7 @@ select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmln
     <h2 id="newsModalTitle" style="font-family:'Playfair Display',serif;font-size:1.5rem;margin-bottom:8px;line-height:1.3;color:var(--black);"></h2>
     <div id="newsModalMeta" style="font-size:12px;color:var(--text-muted);margin-bottom:var(--sp-6);padding-bottom:var(--sp-5);border-bottom:1px solid var(--border);"></div>
     <p id="newsModalBody" style="font-size:15px;line-height:1.8;color:var(--text-mid);"></p>
-    <div style="margin-top:var(--sp-8);padding-top:var(--sp-5);border-top:1px solid var(--border);font-size:13px;color:var(--text-muted);" data-en="For more information contact GOH at info@goh.org.au" data-ar="للمزيد من المعلومات تواصل معنا على info@goh.org.au">For more information contact GOH at info@goh.org.au</div>
+    <div style="margin-top:var(--sp-8);padding-top:var(--sp-5);border-top:1px solid var(--border);font-size:13px;color:var(--text-muted);" data-en="For more information contact GOH at glimmerofhopesa@gmail.com" data-ar="للمزيد من المعلومات تواصل معنا على glimmerofhopesa@gmail.com">For more information contact GOH at glimmerofhopesa@gmail.com</div>
   </div>
 </div>
 
@@ -5549,8 +5730,27 @@ select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmln
               <!-- Phone -->
               <div class="ct-field ct-field-full">
                 <label class="ct-label" for="ctPhone" data-en="Phone (optional)" data-ar="الهاتف (اختياري)">Phone (optional)</label>
-                <div class="ct-input-wrap">
-                  <input class="ct-input" type="tel" id="ctPhone" placeholder="04XX XXX XXX" autocomplete="tel">
+                <div class="ct-phone-row">
+                  <!-- Premium country-code picker -->
+                  <div class="cc-dropdown ct-code-wrap" id="ccDropdown">
+                    <button type="button" class="cc-trigger" id="ccTrigger"
+                      aria-haspopup="listbox" aria-expanded="false" aria-label="Select country code">
+                      <span class="cc-trigger-flag-wrap"><span id="ccTriggerFlag" class="fi fi-au"></span></span>
+                      <span class="cc-trigger-code" id="ccTriggerCode">+61</span>
+                      <svg class="cc-trigger-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <div class="cc-panel" id="ccPanel" role="listbox" aria-label="Country code">
+                      <div class="cc-search-wrap">
+                        <svg class="cc-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                        <input type="text" class="cc-search-input" id="ccSearch" placeholder="Search country…" autocomplete="off" aria-label="Search country">
+                      </div>
+                      <ul class="cc-list" id="ccList" role="listbox"></ul>
+                    </div>
+                    <input type="hidden" id="ctCountryCode" value="+61">
+                  </div>
+                  <div class="ct-input-wrap ct-phone-input">
+                    <input class="ct-input" type="tel" id="ctPhone" placeholder="412 345 678" autocomplete="tel">
+                  </div>
                 </div>
               </div>
               <!-- Topic — custom select with chevron -->
@@ -5568,12 +5768,7 @@ select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmln
                       <option value="events-info">Event information</option>
                       <option value="events-sponsor">Event sponsorship</option>
                     </optgroup>
-                    <optgroup label="Settlement Support">
-                      <option value="settlement-centrelink">Centrelink / Medicare</option>
-                      <option value="settlement-housing">Housing</option>
-                      <option value="settlement-schools">Schools / education</option>
-                      <option value="settlement-employment">Employment</option>
-                    </optgroup>
+                    <option value="newcomers-arrival">Newcomers &amp; Arrival</option>
                     <optgroup label="Youth &amp; Programs">
                       <option value="kids-dabkeh">Dabkeh programme</option>
                       <option value="kids-arabic">Arabic classes</option>
@@ -5673,7 +5868,7 @@ select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmln
               </a>
 
               <!-- Email -->
-              <a class="ctv2-card" href="mailto:info@goh.org.au" style="--gc:rgba(109,40,217,0.45)">
+              <a class="ctv2-card" href="mailto:glimmerofhopesa@gmail.com" style="--gc:rgba(109,40,217,0.45)">
                 <div class="ctv2-card-glow"></div>
                 <div class="ctv2-card-hov ctv2-hov-purple"></div>
                 <div class="ctv2-icon ctv2-icon-purple">
@@ -5684,7 +5879,7 @@ select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmln
                   </svg>
                 </div>
                 <div class="ctv2-card-name" data-en="EMAIL US" data-ar="راسلنا">EMAIL US</div>
-                <div class="ctv2-card-val ctv2-val-link">info@goh.org.au</div>
+                <div class="ctv2-card-val ctv2-val-link">glimmerofhopesa@gmail.com</div>
                 <div class="ctv2-card-cta">
                   <span data-en="Send Email" data-ar="أرسل رسالة">Send Email</span>
                   <svg class="ctv2-cta-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
@@ -5715,7 +5910,7 @@ select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmln
               </a>
 
               <!-- Facebook -->
-              <a class="ctv2-card" href="https://facebook.com/GlimmerOfHopeSA" target="_blank" rel="noopener" style="--gc:rgba(24,119,242,0.45)">
+              <a class="ctv2-card" href="https://www.facebook.com/GlimmerOfHopeSA/" target="_blank" rel="noopener" style="--gc:rgba(24,119,242,0.45)">
                 <div class="ctv2-card-glow"></div>
                 <div class="ctv2-card-hov ctv2-hov-fb"></div>
                 <div class="ctv2-icon ctv2-icon-fb">
@@ -5780,19 +5975,19 @@ select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmln
 
             <!-- Department quick-contacts -->
             <div class="ctv2-dept">
-              <a href="mailto:membership@goh.org.au" class="ctv2-dept-btn">
+              <a href="mailto:glimmerofhopesa@gmail.com" class="ctv2-dept-btn">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
                 <span data-en="Membership" data-ar="العضوية">Membership</span>
               </a>
-              <a href="mailto:events@goh.org.au" class="ctv2-dept-btn">
+              <a href="mailto:glimmerofhopesa@gmail.com" class="ctv2-dept-btn">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
                 <span data-en="Events" data-ar="الفعاليات">Events</span>
               </a>
-              <a href="mailto:youth@goh.org.au" class="ctv2-dept-btn">
+              <a href="mailto:glimmerofhopesa@gmail.com" class="ctv2-dept-btn">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/></svg>
                 <span data-en="Youth" data-ar="الشباب">Youth</span>
               </a>
-              <a href="mailto:settle@goh.org.au" class="ctv2-dept-btn">
+              <a href="mailto:glimmerofhopesa@gmail.com" class="ctv2-dept-btn">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
                 <span data-en="Settlement" data-ar="التوطين">Settlement</span>
               </a>
@@ -6045,13 +6240,13 @@ select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmln
             <h4 data-en="Bank Transfer Details" data-ar="تفاصيل الحوالة البنكية">Bank Transfer Details</h4>
             <table class="bank-tbl">
               <tr><td data-en="Account Name" data-ar="اسم الحساب">Account Name</td><td>Glimmer of Hope Inc</td></tr>
-              <tr><td data-en="BSB" data-ar="BSB">BSB</td><td>06-2000 &nbsp;<small style="color:var(--text-muted);font-family:inherit;">(Commonwealth Bank)</small></td></tr>
-              <tr><td data-en="Account Number" data-ar="رقم الحساب">Account Number</td><td>1234 5678</td></tr>
+              <tr><td data-en="BSB" data-ar="BSB">BSB</td><td>065-150 &nbsp;<small style="color:var(--text-muted);font-family:inherit;">(Commonwealth Bank)</small></td></tr>
+              <tr><td data-en="Account Number" data-ar="رقم الحساب">Account Number</td><td>10714376</td></tr>
               <tr><td data-en="Reference" data-ar="المرجع">Reference</td><td id="bankRef" style="color:var(--green);font-weight:700;">Your Full Name + "Membership"</td></tr>
               <tr><td data-en="Amount" data-ar="المبلغ">Amount</td><td id="bankAmt" style="font-weight:700;">—</td></tr>
             </table>
-            <p class="bank-note" data-en="Please email your transfer receipt to <a href='mailto:membership@goh.org.au'>membership@goh.org.au</a> — your membership will be activated within 2 business days of receipt." data-ar="يرجى إرسال إيصال التحويل إلى membership@goh.org.au — سيتم تفعيل عضويتك خلال يومين عمل.">
-              Please email your transfer receipt to <a href="mailto:membership@goh.org.au">membership@goh.org.au</a> — your membership will be activated within 2 business days of receipt.
+            <p class="bank-note" data-en="Please email your transfer receipt to <a href='mailto:glimmerofhopesa@gmail.com'>glimmerofhopesa@gmail.com</a> — your membership will be activated within 2 business days of receipt." data-ar="يرجى إرسال إيصال التحويل إلى glimmerofhopesa@gmail.com — سيتم تفعيل عضويتك خلال يومين عمل.">
+              Please email your transfer receipt to <a href="mailto:glimmerofhopesa@gmail.com">glimmerofhopesa@gmail.com</a> — your membership will be activated within 2 business days of receipt.
             </p>
           </div>
         </div><!-- /payPanelBank -->
@@ -6259,13 +6454,13 @@ select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmln
                 <h4 data-en="Bank Transfer Details" data-ar="تفاصيل الحوالة البنكية">Bank Transfer Details</h4>
                 <table class="bank-tbl">
                   <tr><td data-en="Account Name" data-ar="اسم الحساب">Account Name</td><td>Glimmer of Hope Inc</td></tr>
-                  <tr><td>BSB</td><td>06-2000 &nbsp;<small style="color:var(--text-muted);font-family:inherit;">(Commonwealth Bank)</small></td></tr>
-                  <tr><td data-en="Account Number" data-ar="رقم الحساب">Account Number</td><td>1234 5678</td></tr>
+                  <tr><td>BSB</td><td>065-150 &nbsp;<small style="color:var(--text-muted);font-family:inherit;">(Commonwealth Bank)</small></td></tr>
+                  <tr><td data-en="Account Number" data-ar="رقم الحساب">Account Number</td><td>10714376</td></tr>
                   <tr><td data-en="Reference" data-ar="المرجع">Reference</td><td id="donBankRef" style="color:var(--green);font-weight:700;">Your Name — Donation</td></tr>
                   <tr><td data-en="Amount" data-ar="المبلغ">Amount</td><td id="donBankAmt" style="font-weight:700;">$50 AUD</td></tr>
                 </table>
-                <p class="bank-note" data-en="Email your transfer receipt to <a href='mailto:donate@goh.org.au'>donate@goh.org.au</a> — we will send acknowledgement within 2 business days." data-ar="أرسل إيصال التحويل إلى donate@goh.org.au وسنرسل تأكيداً خلال يومين عمل.">
-                  Email your receipt to <a href="mailto:donate@goh.org.au">donate@goh.org.au</a> — we'll send acknowledgement within 2 business days.
+                <p class="bank-note" data-en="Email your transfer receipt to <a href='mailto:glimmerofhopesa@gmail.com'>glimmerofhopesa@gmail.com</a> — we will send acknowledgement within 2 business days." data-ar="أرسل إيصال التحويل إلى glimmerofhopesa@gmail.com وسنرسل تأكيداً خلال يومين عمل.">
+                  Email your receipt to <a href="mailto:glimmerofhopesa@gmail.com">glimmerofhopesa@gmail.com</a> — we'll send acknowledgement within 2 business days.
                 </p>
               </div>
             </div><!-- /donPanelBank -->
@@ -6371,14 +6566,11 @@ select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmln
       </div>
       <p style="font-size:13px;color:rgba(255,255,255,0.6);max-width:28ch;line-height:1.7;" data-en="Palestinian Community Organisation — South Australia. Established 2016." data-ar="منظمة مجتمع فلسطيني — جنوب أستراليا. تأسست 2016.">Palestinian Community Organisation — South Australia. Established 2016.</p>
       <div class="footer-socials">
-        <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook" class="social-link">
+        <a href="https://www.facebook.com/GlimmerOfHopeSA/" target="_blank" rel="noopener" aria-label="Facebook" class="social-link">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
         </a>
-        <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram" class="social-link">
+        <a href="https://www.instagram.com/glimmerofhopesa/" target="_blank" rel="noopener" aria-label="Instagram" class="social-link">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-        </a>
-        <a href="https://youtube.com" target="_blank" rel="noopener" aria-label="YouTube" class="social-link">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
         </a>
       </div>
     </div>
@@ -6406,7 +6598,7 @@ select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmln
       <ul class="footer-links" style="line-height:2;">
         <li style="color:rgba(255,255,255,0.6);font-size:13px;">Gepps Cross Community Centre</li>
         <li style="color:rgba(255,255,255,0.6);font-size:13px;">South Australia</li>
-        <li><a href="mailto:info@goh.org.au">info@goh.org.au</a></li>
+        <li><a href="mailto:glimmerofhopesa@gmail.com">glimmerofhopesa@gmail.com</a></li>
         <li><a href="#" onclick="nav('contact')" data-en="Contact Page →" data-ar="صفحة الاتصال →">Contact Page →</a></li>
       </ul>
     </div>
@@ -7002,6 +7194,8 @@ textarea.admin-input { resize: vertical; min-height: 72px; }
 .admin-toolbar-btn:hover { background:#00472a; border-color:#00472a; }
 .admin-toolbar-btn.ghost { background:transparent; color:var(--green); }
 .admin-toolbar-btn.ghost:hover { background:rgba(0,92,52,.08); color:#00472a; }
+.admin-toolbar-btn.danger { background:transparent; color:var(--red); border-color:var(--red); }
+.admin-toolbar-btn.danger:hover { background:var(--red); color:#fff; border-color:var(--red); }
 .admin-toolbar-btn svg { flex-shrink:0; }
 
 /* Seed banner */
@@ -7224,12 +7418,12 @@ function _reLang(){ if(document.documentElement.lang === 'ar') setLang('ar'); }
    COMMITTEE  (data + render)
    ══════════════════════════════════════════════════════════════ */
 const COMMITTEE = [
-  {name:'Rami Mahmoud',  role:'President',          roleAr:'الرئيس'},
-  {name:'Sana Al-Ahmad', role:'Vice President',     roleAr:'نائب الرئيس'},
-  {name:'Khalid Jabari', role:'Secretary',          roleAr:'الأمين العام'},
-  {name:'Lina Nasser',   role:'Treasurer',          roleAr:'أمين الصندوق'},
-  {name:'Tariq Abu-Saleh',role:'Events Coordinator', roleAr:'منسق الفعاليات'},
-  {name:'Mariam Haddad', role:'Youth & Programs',   roleAr:'الشباب والبرامج'}
+  {name:'Luma Al Hammouri',  role:'President',                   roleAr:'الرئيس'},
+  {name:'Farah Babaa',       role:'Vice President',              roleAr:'نائب الرئيس'},
+  {name:'Mahamed Alazaizi',  role:'Treasurer & Public Officer',  roleAr:'أمين الصندوق والمسؤول العام'},
+  {name:'Ahmed El Khalidi',  role:'Community Member',            roleAr:'عضو المجتمع'},
+  {name:'Joe Essa Elaklouk', role:'Community Member',            roleAr:'عضو المجتمع'},
+  {name:'Anas Fayyad',       role:'Community Member',            roleAr:'عضو المجتمع'}
 ];
 function _initials(name){
   return (name||'').trim().split(/\s+/).slice(0,2).map(w=>w[0]||'').join('').toUpperCase() || '?';
@@ -7328,8 +7522,19 @@ const ACTIVITIES = [
 function renderActivities(){
   const grid = document.getElementById('kidsGrid');
   if(!grid) return;
-  grid.innerHTML = ACTIVITIES.map(a => `
+  grid.innerHTML = ACTIVITIES.map(a => {
+    const topicMap = {dabkeh:'kids-dabkeh', arabic:'kids-arabic', football:'kids-football'};
+    const topic = a.topic || topicMap[a.icon] || '';
+    const action = topic ? `registerProgram('${topic}')` : `nav('contact')`;
+    const extra = [
+      a.phone ? `<a class="kids-link" href="tel:${a.phone.replace(/[^+\d]/g,'')}">${a.phone}</a>` : '',
+      a.email ? `<a class="kids-link" href="mailto:${a.email}">${a.email}</a>` : '',
+      a.link  ? `<a class="kids-link" href="${a.link}" target="_blank" rel="noopener">${a.linkLabel||'More info'}</a>` : ''
+    ].filter(Boolean).join('');
+    const media = a.img ? `<div class="kids-photo"><img src="${a.img}" alt="${a.name}" loading="lazy" decoding="async"></div>` : '';
+    return `
     <div class="editable-card">
+      ${media}
       <div class="kids-card-header"><div style="display:flex;align-items:center;gap:10px;">
         <span class="kids-icon" style="color:var(--green);flex-shrink:0;">${gohIconSVG(a.icon || suggestIcon(a.name), 24)}</span>
         <div>
@@ -7339,7 +7544,12 @@ function renderActivities(){
       </div></div>
       ${a.desc ? `<p class="kids-detail" ${_ea(a.desc, a.descAr)}>${a.desc}</p>` : ''}
       ${(a.time||a.age) ? `<div class="ev-meta" style="margin-top:var(--sp-2);font-size:.8rem;">${a.time?`<span>${a.time}</span>`:''}${a.age?`<span>${a.age}</span>`:''}</div>` : ''}
-    </div>`).join('')
+      <div class="kids-card-foot">
+        ${extra}
+        <a class="kids-link kids-link-cta" onclick="${action}" role="button" tabindex="0" ${_ea('Register interest →','سجّل اهتمامك →')}>Register interest →</a>
+      </div>
+    </div>`;
+  }).join('')
     + `<div class="editable-card add-card" onclick="addKidsCard()" role="button" tabindex="0" style="cursor:pointer;display:flex;align-items:center;justify-content:center;min-height:120px;border:2px dashed var(--border);border-radius:var(--r-lg);background:none;">
          <span style="color:var(--text-muted);font-size:14px;" ${_ea('+ Add Activity','+ إضافة نشاط')}>+ Add Activity</span>
        </div>`;
@@ -7358,19 +7568,35 @@ const BUSINESSES = [
    descAr:'المطبخ الفلسطيني الأصيل — مسخن ومقلوبة وغيرها. عائلي الإدارة.'},
   {name:'Olive Tree Imports', suburb:'Online & Markets', icon:'globe',
    desc:"Palestinian olive oil, za'atar, and traditional goods. Sold at SA farmers markets.",
-   descAr:'زيت زيتون فلسطيني وزعتر وبضائع تقليدية. يباع في أسواق المزارعين في جنوب أستراليا.'}
+   descAr:'زيت زيتون فلسطيني وزعتر وبضائع تقليدية. يباع في أسواق المزارعين في جنوب أستراليا.'},
+  {name:'Gemini Marketing and Business Solutions', suburb:'Adelaide, SA', icon:'globe',
+   desc:'Marketing and customer engagement solutions for businesses and organisations.',
+   descAr:'حلول التسويق وإشراك العملاء للشركات والمؤسسات.',
+   contact:'Ahmad Darwish AlHajji, CDMP® MAMI CPM FCIM — Director, Marketing & Customer Engagement',
+   phone:'+61 432 700 230', email:'ahmad@geminisolutions.com.au',
+   link:'https://www.linkedin.com/in/ahmadhaji/', linkLabel:'LinkedIn'}
 ];
 function renderBusinesses(){
   const grid = document.getElementById('bizGrid');
   if(!grid) return;
-  grid.innerHTML = BUSINESSES.map(b => `
+  grid.innerHTML = BUSINESSES.map(b => {
+    const tel = b.phone ? b.phone.replace(/[^+\d]/g,'') : '';
+    const links = [
+      b.phone ? `<a class="biz-link" href="tel:${tel}">${b.phone}</a>` : '',
+      b.email ? `<a class="biz-link" href="mailto:${b.email}">${b.email}</a>` : '',
+      b.link  ? `<a class="biz-link" href="${b.link}" target="_blank" rel="noopener">${b.linkLabel || 'Website'}</a>` : ''
+    ].filter(Boolean).join('');
+    return `
     <div class="editable-card">
       <div class="biz-header">
         <div class="biz-logo-ph" style="display:flex;align-items:center;justify-content:center;">${gohIconSVG(b.icon || suggestIcon(b.name), 22)}</div>
         <div><div class="biz-name">${b.name}</div>${b.suburb?`<div style="font-size:12px;color:var(--text-muted);">${b.suburb}</div>`:''}</div>
       </div>
       ${b.desc ? `<p class="biz-desc" ${_ea(b.desc, b.descAr)}>${b.desc}</p>` : ''}
-    </div>`).join('');
+      ${b.contact ? `<div class="biz-contact-person">${b.contact}</div>` : ''}
+      ${links ? `<div class="biz-links">${links}</div>` : ''}
+    </div>`;
+  }).join('');
   _reLang();
 }
 
@@ -7404,8 +7630,11 @@ function renderPrograms(){
   if(!grid) return;
   grid.innerHTML = PROGRAMS.map(p => {
     const meta = (p.meta||[]).map((m,i)=>`<span ${_ea(m, (p.metaAr&&p.metaAr[i])||m)}>${m}</span>`).join('');
+    const media = p.img
+      ? `<div class="program-photo"><img src="${p.img}" alt="${p.name}" loading="lazy" decoding="async"></div>`
+      : `<div class="program-icon" aria-hidden="true">${gohIconSVG(p.icon || suggestIcon(p.name), 32)}</div>`;
     return `<div class="program-card">
-      <div class="program-icon" aria-hidden="true">${gohIconSVG(p.icon || suggestIcon(p.name), 32)}</div>
+      ${media}
       <div class="program-badge ${p.badge||'free'}" ${_ea(p.badgeLabel||'Free', p.badgeLabelAr)}>${p.badgeLabel||'Free'}</div>
       <h3 class="program-name" ${_ea(p.name, p.nameAr)}>${p.name}</h3>
       <p class="program-desc" ${_ea(p.desc, p.descAr)}>${p.desc||''}</p>
@@ -7646,7 +7875,7 @@ function submitArrivalForm(btn){
     'Needs help with: '+(chips||'—')+'\n'+
     'Notes: '+(notes&&notes.value.trim()||'—')
   );
-  window.location.href='mailto:info@goh.org.au?subject='+subject+'&body='+body;
+  window.location.href='mailto:glimmerofhopesa@gmail.com?subject='+subject+'&body='+body;
   btn.disabled=true;
   setTimeout(()=>{
     const s=document.getElementById('arrivalSuccess');
@@ -7654,7 +7883,197 @@ function submitArrivalForm(btn){
     btn.style.display='none';
   },800);
 }
-function submitContact(btn){const e=document.getElementById('ctEmail');if(!e||!e.value.trim()){alert('Please enter your email address.');return;}btn.disabled=true;btn.textContent='Sending...';setTimeout(()=>{const s=document.getElementById('contactSuccess');if(s)s.style.display='flex';btn.style.display='none';},900);}
+/* ── CONTACT FORM SENDING ──────────────────────────────────────────────
+   This works on ANY host (GitHub Pages, Netlify, your own domain).
+   To deliver messages to glimmerofhopesa@gmail.com as real email, paste a free
+   Web3Forms access key below:
+     1. Go to https://web3forms.com  →  enter glimmerofhopesa@gmail.com  →  get a key.
+     2. Paste the key between the quotes on the next line.
+   Until a key is set (or if the request ever fails), the form falls back to
+   opening the visitor's own email app, pre-addressed to glimmerofhopesa@gmail.com.
+   NOTE: form submissions are delivered to whatever email this KEY was registered
+   with at web3forms.com — make sure that is glimmerofhopesa@gmail.com. */
+const WEB3FORMS_ACCESS_KEY = '731e47a7-80f7-42d5-ae87-8e6a657fc9a0';   // delivers to the email registered with this Web3Forms key
+
+// ── Premium Country Code Dropdown ───────────────────────────
+(function initCCDropdown(){
+  const COUNTRIES = [
+    {iso:'au',n:'Australia',            c:'+61'},
+    {iso:'ps',n:'Palestine',            c:'+970'},
+    {iso:'jo',n:'Jordan',               c:'+962'},
+    {iso:'lb',n:'Lebanon',              c:'+961'},
+    {iso:'sy',n:'Syria',                c:'+963'},
+    {iso:'eg',n:'Egypt',                c:'+20'},
+    {iso:'sa',n:'Saudi Arabia',         c:'+966'},
+    {iso:'ae',n:'United Arab Emirates', c:'+971'},
+    {iso:'qa',n:'Qatar',                c:'+974'},
+    {iso:'bh',n:'Bahrain',              c:'+973'},
+    {iso:'kw',n:'Kuwait',               c:'+965'},
+    {iso:'om',n:'Oman',                 c:'+968'},
+    {iso:'iq',n:'Iraq',                 c:'+964'},
+    {iso:'ye',n:'Yemen',                c:'+967'},
+    {iso:'ir',n:'Iran',                 c:'+98'},
+    {iso:'tr',n:'Turkey',               c:'+90'},
+    {iso:'us',n:'United States / Canada',c:'+1'},
+    {iso:'gb',n:'United Kingdom',       c:'+44'},
+    {iso:'nz',n:'New Zealand',          c:'+64'},
+    {iso:'ie',n:'Ireland',              c:'+353'},
+    {iso:'de',n:'Germany',              c:'+49'},
+    {iso:'fr',n:'France',               c:'+33'},
+    {iso:'es',n:'Spain',                c:'+34'},
+    {iso:'it',n:'Italy',                c:'+39'},
+    {iso:'nl',n:'Netherlands',          c:'+31'},
+    {iso:'se',n:'Sweden',               c:'+46'},
+    {iso:'no',n:'Norway',               c:'+47'},
+    {iso:'dk',n:'Denmark',              c:'+45'},
+    {iso:'ch',n:'Switzerland',          c:'+41'},
+    {iso:'be',n:'Belgium',              c:'+32'},
+    {iso:'pt',n:'Portugal',             c:'+351'},
+    {iso:'gr',n:'Greece',               c:'+30'},
+    {iso:'in',n:'India',                c:'+91'},
+    {iso:'pk',n:'Pakistan',             c:'+92'},
+    {iso:'id',n:'Indonesia',            c:'+62'},
+    {iso:'my',n:'Malaysia',             c:'+60'},
+    {iso:'sg',n:'Singapore',            c:'+65'},
+    {iso:'ph',n:'Philippines',          c:'+63'},
+    {iso:'cn',n:'China',                c:'+86'},
+    {iso:'jp',n:'Japan',                c:'+81'},
+    {iso:'kr',n:'South Korea',          c:'+82'},
+    {iso:'za',n:'South Africa',         c:'+27'},
+    {iso:'ng',n:'Nigeria',              c:'+234'},
+    {iso:'ma',n:'Morocco',              c:'+212'},
+    {iso:'dz',n:'Algeria',              c:'+213'},
+    {iso:'tn',n:'Tunisia',              c:'+216'},
+    {iso:'ly',n:'Libya',                c:'+218'},
+    {iso:'br',n:'Brazil',               c:'+55'},
+    {iso:'mx',n:'Mexico',               c:'+52'},
+    {iso:'',  n:'Other / not listed',   c:'+other'}
+  ];
+
+  function init(){
+    const wrap   = document.getElementById('ccDropdown');
+    const trigger= document.getElementById('ccTrigger');
+    const panel  = document.getElementById('ccPanel');
+    const search = document.getElementById('ccSearch');
+    const list   = document.getElementById('ccList');
+    const flagEl = document.getElementById('ccTriggerFlag');
+    const codeEl = document.getElementById('ccTriggerCode');
+    const hidden = document.getElementById('ctCountryCode');
+    if (!wrap || !trigger) return;
+
+    function renderList(q){
+      const lq = q.toLowerCase();
+      const filtered = COUNTRIES.filter(x => !lq || x.n.toLowerCase().includes(lq) || x.c.includes(lq) || (x.iso && x.iso.includes(lq)));
+      list.innerHTML = '';
+      if (!filtered.length){ list.innerHTML='<li class="cc-empty">No results</li>'; return; }
+      filtered.forEach(x => {
+        const li = document.createElement('li');
+        const active = x.c === hidden.value;
+        li.className = 'cc-item' + (active ? ' cc-item-active' : '');
+        li.setAttribute('role','option');
+        li.setAttribute('aria-selected', active ? 'true' : 'false');
+        li.dataset.code = x.c;
+        const flagHtml = x.iso
+          ? `<span class="fi fi-${x.iso}"></span>`
+          : `<svg class="cc-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M12 3c0 0-3.5 4-3.5 9s3.5 9 3.5 9"/><path d="M12 3c0 0 3.5 4 3.5 9s-3.5 9-3.5 9"/><path d="M3.6 9h16.8M3.6 15h16.8"/></svg>`;
+        const tick = active ? `<svg class="cc-tick" viewBox="0 0 24 24" fill="none" stroke="#005C34" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>` : `<span class="cc-tick"></span>`;
+        li.innerHTML = `<span class="cc-item-flag">${flagHtml}</span><span class="cc-item-name">${x.n}</span><span class="cc-item-code">${x.c !== '+other' ? x.c : ''}</span>${tick}`;
+        li.addEventListener('click', () => select(x));
+        list.appendChild(li);
+      });
+    }
+
+    function select(x){
+      hidden.value = x.c;
+      if (x.iso) {
+        flagEl.className = 'fi fi-' + x.iso;
+        flagEl.innerHTML = '';
+      } else {
+        flagEl.className = '';
+        flagEl.innerHTML = `<svg class="cc-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M12 3c0 0-3.5 4-3.5 9s3.5 9 3.5 9"/><path d="M12 3c0 0 3.5 4 3.5 9s-3.5 9-3.5 9"/><path d="M3.6 9h16.8M3.6 15h16.8"/></svg>`;
+      }
+      codeEl.textContent = x.c !== '+other' ? x.c : '?';
+      close();
+    }
+
+    function open(){
+      panel.classList.add('cc-open');
+      trigger.setAttribute('aria-expanded','true');
+      search.value='';
+      renderList('');
+      // scroll active item into view
+      setTimeout(()=>{ const a=list.querySelector('.cc-item-active'); if(a) a.scrollIntoView({block:'nearest'}); search.focus(); },60);
+    }
+
+    function close(){
+      panel.classList.remove('cc-open');
+      trigger.setAttribute('aria-expanded','false');
+    }
+
+    trigger.addEventListener('click', e => { e.stopPropagation(); panel.classList.contains('cc-open') ? close() : open(); });
+    search.addEventListener('input', () => renderList(search.value));
+    document.addEventListener('click', e => { if (!wrap.contains(e.target)) close(); });
+    document.addEventListener('keydown', e => { if (e.key==='Escape' && panel.classList.contains('cc-open')){ close(); e.preventDefault(); } });
+
+    renderList(''); // pre-render so first open is instant
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+})();
+
+function _contactPayload(){
+  const v = id => { const el = document.getElementById(id); return el ? el.value.trim() : ''; };
+  const name = (v('ctFirst') + ' ' + v('ctLast')).trim();
+  const rawPhone = v('ctPhone');
+  let code = v('ctCountryCode');
+  if (code === '+other') code = '';
+  const phone = rawPhone ? (code ? (code + ' ' + rawPhone) : rawPhone) : '';
+  return {
+    name: name || 'Website visitor',
+    email: v('ctEmail'), phone: phone,
+    topic: v('ctTopic'), language: v('ctLang'), message: v('ctMsg')
+  };
+}
+function _contactDone(btn){
+  const s = document.getElementById('contactSuccess'); if (s) s.style.display = 'flex';
+  btn.style.display = 'none';
+}
+function _contactMailto(p, btn){
+  const subject = encodeURIComponent('GOH website enquiry' + (p.topic ? (' — ' + p.topic) : ''));
+  const body = encodeURIComponent(
+    'Name: ' + p.name + '\nEmail: ' + p.email + '\nPhone: ' + (p.phone || '—') +
+    '\nTopic: ' + (p.topic || '—') + '\nPreferred language: ' + (p.language || '—') +
+    '\n\nMessage:\n' + (p.message || '—'));
+  window.location.href = 'mailto:glimmerofhopesa@gmail.com?subject=' + subject + '&body=' + body;
+  _contactDone(btn);
+}
+async function submitContact(btn){
+  const p = _contactPayload();
+  if (!p.email)   { alert('Please enter your email address.'); return; }
+  if (!p.message) { alert('Please enter a message.'); return; }
+  btn.disabled = true;
+  const span = btn.querySelector('span'); if (span) span.textContent = 'Sending…';
+
+  if (!WEB3FORMS_ACCESS_KEY) { _contactMailto(p, btn); return; }   // no key → email-app handoff
+
+  try {
+    const res = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify({
+        access_key: WEB3FORMS_ACCESS_KEY,
+        subject: 'GOH website enquiry' + (p.topic ? (' — ' + p.topic) : ''),
+        from_name: p.name, name: p.name, email: p.email, phone: p.phone || '—',
+        topic: p.topic || '—', preferred_language: p.language || '—',
+        message: p.message || '—', replyto: p.email
+      })
+    });
+    const data = await res.json().catch(() => ({}));
+    if (res.ok && data.success) { _contactDone(btn); }
+    else { _contactMailto(p, btn); }                                // service error → fallback
+  } catch (e) { _contactMailto(p, btn); }                            // network error → fallback
+}
 function submitNewsletter(btn){const e=document.getElementById('newsEmail');if(!e||!e.value.trim()){alert('Please enter your email.');return;}btn.disabled=true;btn.textContent='...';setTimeout(()=>{const s=document.getElementById('newsSuccess');if(s)s.style.display='flex';btn.closest('.newsletter-form').style.display='none';},600);}
 
 /* ── MEMBERSHIP ── */
@@ -8783,6 +9202,10 @@ document.addEventListener('DOMContentLoaded', () => {
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
           Restore defaults
         </button>
+        <button class="admin-toolbar-btn danger" onclick="adminReplaceAllFromFile()" title="DELETE all current data and reload the content built into this HTML file. Use after editing the file. Cannot be undone.">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
+          Replace all with file content
+        </button>
       </div>
 
       <!-- Restore / top-up default content -->
@@ -8941,6 +9364,8 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="icon-picker" id="adminActIconGrid"></div></div>
         <div class="admin-form-group"><label>…or custom logo URL (overrides icon)</label>
           <input type="text" id="adminActIconUrl" class="admin-input" placeholder="https://…/logo.png" oninput="onIconUrl('Act')"></div>
+        <div class="admin-form-group"><label>Photo <span style="color:var(--text-muted);font-weight:400;">— shows a picture at the top of the card. Use a filename in the site folder (e.g. dabkeh.jpg) or a full URL</span></label>
+          <input type="text" id="adminActImg" class="admin-input" placeholder="dabkeh.jpg  or  https://…/photo.jpg"></div>
         <div class="admin-form-group"><label>Description (English)</label>
           <textarea id="adminActDesc" class="admin-input" rows="2" placeholder="Brief description…"></textarea></div>
         <div class="admin-form-group"><label>Description (Arabic)</label>
@@ -9004,6 +9429,8 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="icon-picker" id="adminProgIconGrid"></div></div>
         <div class="admin-form-group"><label>…or custom logo URL (overrides icon)</label>
           <input type="text" id="adminProgIconUrl" class="admin-input" placeholder="https://…/logo.png" oninput="onIconUrl('Prog')"></div>
+        <div class="admin-form-group"><label>Photo <span style="color:var(--text-muted);font-weight:400;">— shows a picture at the top of the card. Use a filename in the site folder (e.g. dabkeh.jpg) or a full URL</span></label>
+          <input type="text" id="adminProgImg" class="admin-input" placeholder="dabkeh.jpg  or  https://…/photo.jpg"></div>
         <div class="admin-form-group"><label>Description (English)</label>
           <textarea id="adminProgDesc" class="admin-input" rows="2" placeholder="Brief description…"></textarea></div>
         <div class="admin-form-group"><label>Description (Arabic)</label>
@@ -9153,6 +9580,14 @@ const _SEED_CFG = {
 const _DEFAULTS = {};
 Object.keys(_SEED_CFG).forEach(col => {
   _DEFAULTS[col] = _SEED_CFG[col].arr().map(it => JSON.parse(JSON.stringify(it)));
+});
+
+/* A pristine, never-mutated copy of the content hard-coded in THIS file.
+   Unlike _DEFAULTS (which a saved "restore point" can overwrite), this always
+   reflects the arrays in the HTML. Used by "Replace all with file content". */
+const _FILE_DEFAULTS = {};
+Object.keys(_SEED_CFG).forEach(col => {
+  _FILE_DEFAULTS[col] = _SEED_CFG[col].arr().map(it => JSON.parse(JSON.stringify(it)));
 });
 
 /* Auto-seed a collection ONCE if Firestore returns it empty while the page
@@ -9340,7 +9775,7 @@ function _adminEdit(type, id) {
     const a = ACTIVITIES.find(x => x.id === id); if (!a) return;
     _setV('adminActEditId', id); _setV('adminActName', a.name); _setV('adminActNameAr', a.nameAr);
     _setV('adminActBadge', a.badge||'badge-social'); _setV('adminActAge', a.age); _setV('adminActTime', a.time);
-    _setV('adminActDesc', a.desc); _setV('adminActDescAr', a.descAr);
+    _setV('adminActDesc', a.desc); _setV('adminActDescAr', a.descAr); _setV('adminActImg', a.img);
     const icon = a.icon || suggestIcon(a.name);
     if (/^https?:\/\//i.test(icon)) { _setV('adminActIconUrl', icon); _setV('adminActIcon', icon); _highlightIcon('Act','__none__'); }
     else { _setV('adminActIconUrl',''); _setV('adminActIcon', icon); _highlightIcon('Act', icon); }
@@ -9352,7 +9787,7 @@ function _adminEdit(type, id) {
     const p = PROGRAMS.find(x => x.id === id); if (!p) return;
     _setV('adminProgEditId', id); _setV('adminProgName', p.name); _setV('adminProgNameAr', p.nameAr);
     _setV('adminProgBadge', p.badge||'free'); _setV('adminProgBadgeLabel', p.badgeLabel||'Free');
-    _setV('adminProgDesc', p.desc); _setV('adminProgDescAr', p.descAr);
+    _setV('adminProgDesc', p.desc); _setV('adminProgDescAr', p.descAr); _setV('adminProgImg', p.img);
     _setV('adminProgMeta', Array.isArray(p.meta) ? p.meta.join(', ') : (p.meta||''));
     _setV('adminProgTopic', p.topic||'program-workshop');
     const icon = p.icon || suggestIcon(p.name);
@@ -9382,9 +9817,9 @@ function adminCancelEdit(prefix) {
     Ev  : ['adminEvTitle','adminEvDate','adminEvTime','adminEvLoc','adminEvPrice','adminEvDesc'],
     News: ['adminNewsTitle','adminNewsDate','adminNewsSummary'],
     P   : ['adminPName','adminPAbbr','adminPFullName','adminPDesc','adminPLogo'],
-    Act : ['adminActName','adminActNameAr','adminActAge','adminActTime','adminActDesc','adminActDescAr','adminActIcon','adminActIconUrl'],
+    Act : ['adminActName','adminActNameAr','adminActAge','adminActTime','adminActDesc','adminActDescAr','adminActIcon','adminActIconUrl','adminActImg'],
     Com : ['adminComName','adminComRole','adminComRoleAr','adminComAvatar'],
-    Prog: ['adminProgName','adminProgNameAr','adminProgBadgeLabel','adminProgDesc','adminProgDescAr','adminProgMeta','adminProgTopic','adminProgIcon','adminProgIconUrl'],
+    Prog: ['adminProgName','adminProgNameAr','adminProgBadgeLabel','adminProgDesc','adminProgDescAr','adminProgMeta','adminProgTopic','adminProgIcon','adminProgIconUrl','adminProgImg'],
     Biz : ['adminBizName','adminBizSuburb','adminBizDesc','adminBizDescAr','adminBizIcon','adminBizIconUrl'],
     Faq : ['adminFaqQ','adminFaqA']
   };
@@ -9517,7 +9952,8 @@ async function adminSaveActivity() {
     desc  : (document.getElementById('adminActDesc')?.value  || '').trim(),
     descAr: (document.getElementById('adminActDescAr')?.value|| '').trim(),
     time  : (document.getElementById('adminActTime')?.value  || '').trim(),
-    age   : (document.getElementById('adminActAge')?.value   || '').trim()
+    age   : (document.getElementById('adminActAge')?.value   || '').trim(),
+    img   : (document.getElementById('adminActImg')?.value   || '').trim()
   };
   const editId = document.getElementById('adminActEditId')?.value;
   if (await _adminSave('activities', act, editId, ACTIVITIES, renderActivities, 'Activity')) adminCancelEdit('Act');
@@ -9552,7 +9988,8 @@ async function adminSaveProgram() {
     desc      : (document.getElementById('adminProgDesc')?.value   || '').trim(),
     descAr    : (document.getElementById('adminProgDescAr')?.value || '').trim(),
     meta      : metaStr ? metaStr.split(',').map(s => s.trim()).filter(Boolean) : [],
-    topic     : (document.getElementById('adminProgTopic')?.value || 'program-workshop').trim()
+    topic     : (document.getElementById('adminProgTopic')?.value || 'program-workshop').trim(),
+    img       : (document.getElementById('adminProgImg')?.value || '').trim()
   };
   const editId = document.getElementById('adminProgEditId')?.value;
   if (await _adminSave('programs', prog, editId, PROGRAMS, renderPrograms, 'Program')) adminCancelEdit('Prog');
@@ -9669,6 +10106,35 @@ async function adminSeedAll() {
     }
     showAdminToast(n ? `Added ${n} missing item(s) to the database.` : 'All default content is already in the database.');
   } catch(e) { showAdminToast('⚠ Seed failed: '+e.message, true); }
+}
+
+/* ── Replace ALL live content with the content built into this HTML file ──
+   Deletes every existing record in every collection, then loads the file's
+   arrays. Use this after you have edited the content in the HTML and want the
+   old database data gone for good. Destructive + irreversible. */
+async function adminReplaceAllFromFile() {
+  const fb = window._gohFB;
+  if (!fb?.isConfigured) { showAdminToast('⚠ Configure Firebase first.', true); return; }
+  if (!confirm('Replace ALL live content with the content built into this HTML file?\n\nThis permanently DELETES every event, news item, committee member, partner, activity, program, business and FAQ currently in the database, then loads the content from the file.\n\nThis CANNOT be undone. Continue?')) return;
+  if (!confirm('Final check: delete all current data and replace it with the file content?')) return;
+  showAdminToast('Replacing all content from file…');
+  let del = 0, add = 0;
+  try {
+    for (const col of Object.keys(_FILE_DEFAULTS)) {
+      const cfg = _SEED_CFG[col];
+      // 1) delete every record currently in this collection
+      const ids = [...new Set(cfg.arr().map(x => x && x.id).filter(Boolean))];
+      for (const id of ids) { await fb.remove(col, id); del++; }
+      // 2) load the file's content (deterministic ids → clean, no duplicates)
+      for (const it of _FILE_DEFAULTS[col]) {
+        const id = cfg.id(it);
+        const { id:_i, _createdAt, _updatedAt, ...data } = it;
+        await fb.set(col, id, data);
+        add++;
+      }
+    }
+    showAdminToast(`Done — removed ${del} old record(s), loaded ${add} from the file.`);
+  } catch(e) { showAdminToast('⚠ Replace failed: '+e.message, true); }
 }
 
 /* ── Toast ──────────────────────────────────────────────── */
